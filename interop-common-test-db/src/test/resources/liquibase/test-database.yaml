@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: sample-table-create
+      author: Josh Smith
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: sample_table
+      changes:
+        - createTable:
+            tableName: sample_table
+            columns:
+              - column:
+                  name: sample_table_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_sample_table
+              - column:
+                  name: name
+                  type: java.sql.Types.VARCHAR(10)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_sample_table_name
+              - column:
+                  name: value
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false

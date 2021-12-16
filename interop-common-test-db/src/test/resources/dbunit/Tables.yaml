@@ -1,0 +1,7 @@
+sample_table:
+  - sample_table_id: 1
+    name: "key1"
+    value: "Value 1"
+  - sample_table_id: 2
+    name: "key2"
+    value: "Value 2"
