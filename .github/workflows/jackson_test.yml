@@ -31,5 +31,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
-          file: ./interop-common-test-db/codecov/test/jacocoTestReport.xml
+          file: ./interop-common-jackson/codecov/test/jacocoTestReport.xml
           flags: jackson

@@ -4,6 +4,11 @@ codecov:
 coverage:
   status:
     project:
+      common:
+        target: auto
+        threshold: 1%
+        flags:
+          - common
       jackson:
         target: auto
         threshold: 1%
@@ -16,6 +21,12 @@ coverage:
           - test-db
 
     patch:
+      common:
+        target: 80
+        threshold: 1%
+        base: auto
+        flags:
+          - common
       jackson:
         target: 80
         threshold: 1%
@@ -39,6 +50,10 @@ comment:
   show_carryforward_flags: false
 
 flags:
+  common:
+    paths:
+      - interop-common/
+    carryforward: true
   jackson:
     paths:
       - interop-common-jackson/
