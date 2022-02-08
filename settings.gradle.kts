@@ -9,6 +9,14 @@ for (project in rootProject.children) {
 }
 
 pluginManagement {
+    val interopGradleVersion: String by settings
+    plugins {
+        id("com.projectronin.interop.gradle.base") version interopGradleVersion
+        id("com.projectronin.interop.gradle.ktorm") version interopGradleVersion
+        id("com.projectronin.interop.gradle.mockk") version interopGradleVersion
+        id("com.projectronin.interop.gradle.publish") version interopGradleVersion
+    }
+
     repositories {
         maven {
             url = uri("https://maven.pkg.github.com/projectronin/package-repo")
@@ -17,6 +25,7 @@ pluginManagement {
                 password = System.getenv("PACKAGE_TOKEN")
             }
         }
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
     }
