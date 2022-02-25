@@ -30,6 +30,6 @@ annotation class LiquibaseTest(
     val dbUrl: String = DEFAULT_DB_URL
 ) {
     companion object {
-        const val DEFAULT_DB_URL = "jdbc:tc:mysql://localhost:3306/databasename?TC_DAEMON=true"
+        const val DEFAULT_DB_URL = "jdbc:tc:mysql:8.0://localhost:3306/databasename?TC_DAEMON=true"
     }
 }
