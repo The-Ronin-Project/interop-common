@@ -7,6 +7,6 @@ class ResourceTypeTest {
     @Test
     fun `all resource types available`() {
         val allValues = ResourceType.values()
-        assertEquals(7, allValues.size)
+        assertEquals(8, allValues.size)
     }
 }

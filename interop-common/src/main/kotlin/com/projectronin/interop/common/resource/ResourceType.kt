@@ -10,5 +10,6 @@ enum class ResourceType {
     PRACTITIONER_ROLE,
     PRACTITIONER,
     OUTBOUND_MESSAGE,
-    CONDITION
+    CONDITION,
+    LOCATION
 }
