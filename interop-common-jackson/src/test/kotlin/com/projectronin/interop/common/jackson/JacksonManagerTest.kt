@@ -3,6 +3,7 @@ package com.projectronin.interop.common.jackson
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -20,6 +21,12 @@ class JacksonManagerTest {
     fun `adds kotlin module`() {
         val objectMapper = JacksonManager.objectMapper
         assertTrue(objectMapper.registeredModuleIds.contains(KotlinModule::class.java.name))
+    }
+
+    @Test
+    fun `adds java time module`() {
+        val objectMapper = JacksonManager.objectMapper
+        assertTrue(objectMapper.registeredModuleIds.contains(JavaTimeModule::class.java.name))
     }
 
     @Test
