@@ -9,8 +9,8 @@ dependencies {
     implementation("org.testcontainers:junit-jupiter")
 
     // Database Rider
-    implementation("com.github.database-rider:rider-junit5:1.29.0")
+    implementation("com.github.database-rider:rider-junit5:1.32.3")
 
     // Liquibase
-    implementation("org.liquibase:liquibase-core:4.4.3")
+    implementation("org.liquibase:liquibase-core:4.9.1")
 }

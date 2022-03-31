@@ -78,6 +78,7 @@ class LiquibaseExtension : BeforeEachCallback, AfterAllCallback {
 
         logger.info { "Liquibase setup complete" }
 
+        connection.autoCommit = true
         return connection
     }
 

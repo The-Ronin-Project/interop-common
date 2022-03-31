@@ -245,6 +245,23 @@ class LiquibaseExtensionTest {
         assertTrue(instance.connectionHolder !== instance2.connectionHolder)
     }
 
+    @Test
+    fun `sets connection to auto-commit`() {
+        val instance = LiquibaseTestOnClass()
+
+        val context = mockk<ExtensionContext> {
+            every { testClass } returns Optional.of(LiquibaseTestOnClass::class.java)
+            every { testInstances } returns Optional.of(
+                mockk {
+                    every { findInstance(LiquibaseTestOnClass::class.java) } returns Optional.of(instance)
+                }
+            )
+        }
+
+        extension.beforeEach(context)
+        assertTrue(instance.connectionHolder.connection.autoCommit)
+    }
+
     private fun getExpectedConnectionHolder(): ConnectionHolder? {
         val connectionHolderProperty = extension::class.memberProperties.find { it.name == "connectionHolder" }!!
         connectionHolderProperty.getter.isAccessible = true

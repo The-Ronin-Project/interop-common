@@ -20,13 +20,13 @@ class JacksonManagerTest {
     @Test
     fun `adds kotlin module`() {
         val objectMapper = JacksonManager.objectMapper
-        assertTrue(objectMapper.registeredModuleIds.contains(KotlinModule::class.java.name))
+        assertTrue(objectMapper.registeredModuleIds.contains(KotlinModule().typeId))
     }
 
     @Test
     fun `adds java time module`() {
         val objectMapper = JacksonManager.objectMapper
-        assertTrue(objectMapper.registeredModuleIds.contains(JavaTimeModule::class.java.name))
+        assertTrue(objectMapper.registeredModuleIds.contains(JavaTimeModule().typeId))
     }
 
     @Test
