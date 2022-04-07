@@ -1,6 +1,7 @@
 package com.projectronin.interop.common.spring
 
 import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.features.json.JacksonSerializer
@@ -17,6 +18,7 @@ class BaseSpringConfig {
         return HttpClient(CIO) {
             install(JsonFeature) {
                 serializer = JacksonSerializer() {
+                    registerModule(JavaTimeModule())
                     disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
                 }
             }
