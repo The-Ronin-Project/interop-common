@@ -37,7 +37,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Execute build
-        if: ${{ github.event.inputs.skip_publish == false }}
+        if: ${{ github.event.inputs.skip_publish == 'false' }}
         run: ./gradlew build
 
       - name: Get version
@@ -53,7 +53,7 @@ jobs:
 
       - name: Axion Release
         id: release
-        if: ${{ github.event.inputs.skip_publish == false }}
+        if: ${{ github.event.inputs.skip_publish == 'false' }}
         run: |
           ./gradlew release \
              -Prelease.forceVersion=${{ steps.get-version.outputs.version }} \
@@ -80,7 +80,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Publish
-        if: ${{ github.event.inputs.skip_publish == false }}
+        if: ${{ github.event.inputs.skip_publish == 'false' }}
         run: ./gradlew publish
         env:
           NEXUS_USER: ${{ secrets.NEXUS_MAVEN_USER }}
