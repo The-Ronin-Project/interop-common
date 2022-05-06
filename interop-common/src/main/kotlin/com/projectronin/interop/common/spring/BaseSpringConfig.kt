@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
-import io.ktor.client.features.json.JacksonSerializer
-import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.jackson.jackson
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
@@ -18,14 +18,15 @@ class BaseSpringConfig {
     @Primary
     fun getHttpClient(): HttpClient {
         return HttpClient(CIO) {
-            install(JsonFeature) {
-                serializer = JacksonSerializer {
+            install(ContentNegotiation) {
+                jackson {
                     registerModule(JavaTimeModule())
-                    setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
-                    disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                     disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                    disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                    setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
                 }
             }
+            expectSuccess = true
         }
     }
 }

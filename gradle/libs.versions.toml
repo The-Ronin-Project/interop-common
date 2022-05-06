@@ -1,3 +1,7 @@
 [libraries]
 liquibase-core = "org.liquibase:liquibase-core:4.9.1"
 rider-junit5 = "com.github.database-rider:rider-junit5:1.32.3"
+ktor-client-cio = "io.ktor:ktor-client-cio:2.0.1"
+ktor-client-core = "io.ktor:ktor-client-core:2.0.1"
+ktor-client-content-negotiation = "io.ktor:ktor-client-content-negotiation:2.0.1"
+ktor-serialization-jackson = "io.ktor:ktor-serialization-jackson:2.0.1"
