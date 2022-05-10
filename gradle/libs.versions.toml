@@ -1,5 +1,5 @@
 [libraries]
-liquibase-core = "org.liquibase:liquibase-core:4.9.1"
+liquibase-core = "org.liquibase:liquibase-core:4.10.0"
 rider-junit5 = "com.github.database-rider:rider-junit5:1.32.3"
 ktor-client-cio = "io.ktor:ktor-client-cio:2.0.1"
 ktor-client-core = "io.ktor:ktor-client-core:2.0.1"
