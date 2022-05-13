@@ -9,6 +9,6 @@ ktor-client-content-negotiation = "io.ktor:ktor-client-content-negotiation:2.0.1
 ktor-serialization-jackson = "io.ktor:ktor-serialization-jackson:2.0.1"
 ktorm-core = "org.ktorm:ktorm-core:3.4.1"
 liquibase-core = "org.liquibase:liquibase-core:4.10.0"
-mockk = "io.mockk:mockk:1.12.3"
+mockk = "io.mockk:mockk:1.12.4"
 rider-junit5 = "com.github.database-rider:rider-junit5:1.32.3"
 testcontainers-bom = "org.testcontainers:testcontainers-bom:1.17.1"
