@@ -14,7 +14,9 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Timeout
 import java.io.OutputStream
+import java.util.concurrent.TimeUnit
 
 class ContentLengthSupplierTest {
     private val testOutputPhase = PipelinePhase("TestOutput")
@@ -75,24 +77,9 @@ class ContentLengthSupplierTest {
     }
 
     @Test
-    fun `handles multiple reads of the OutputStreamContent`() {
-        // Ensure that we have some text that changes across the cut-off barrier so we know we are reading the proper text.
-        val expectedText = "x".repeat(900) + "y".repeat(400)
-        val outputStreamUnit: (OutputStream) -> Unit = {
-            it.write(expectedText.toByteArray())
-        }
-        val inputContent = OutputStreamContent(outputStreamUnit, ContentType.Text.Plain)
-        runPipelineAndAssertOutput(inputContent) { output ->
-            output as ByteArrayContent
-            assertEquals(expectedText, String(output.bytes()))
-            assertEquals(ContentType.Text.Plain, output.contentType)
-            assertEquals(expectedText.length.toLong(), output.contentLength)
-        }
-    }
-
-    @Test
-    fun `handles a single full read and second empty read of the OutputStreamContent`() {
-        val expectedText = "x".repeat(1024)
+    @Timeout(value = 1, unit = TimeUnit.SECONDS)
+    fun `handles very large reads of the OutputStreamContent`() {
+        val expectedText = "x".repeat(1_000_000)
         val outputStreamUnit: (OutputStream) -> Unit = {
             it.write(expectedText.toByteArray())
         }
