@@ -1,7 +1,7 @@
 [libraries]
 jackson-annotations = "com.fasterxml.jackson.core:jackson-annotations:2.13.3"
 jackson-databind = "com.fasterxml.jackson.core:jackson-databind:2.13.3"
-jackson-datatype-jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2"
+jackson-datatype-jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3"
 jackson-module-kotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3"
 ktor-client-cio = "io.ktor:ktor-client-cio:2.0.1"
 ktor-client-core = "io.ktor:ktor-client-core:2.0.1"
