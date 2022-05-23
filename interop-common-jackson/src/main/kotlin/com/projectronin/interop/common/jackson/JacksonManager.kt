@@ -2,10 +2,11 @@ package com.projectronin.interop.common.jackson
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jsonMapper
-import com.fasterxml.jackson.module.kotlin.kotlinModule
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
 /**
  * Manager for Jackson configuration.
@@ -15,12 +16,20 @@ class JacksonManager {
         /**
          * The JSON object mapper for Jackson.
          */
-        val objectMapper = jsonMapper {
-            addModule(kotlinModule())
-            addModule(JavaTimeModule())
-            configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-            configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-            serializationInclusion(JsonInclude.Include.NON_EMPTY)
+        val objectMapper = setUpMapper(jsonMapper())
+
+        /**
+         * Sets up the supplied [objectMapper] with the required details for using Jackson within Interops.
+         */
+        fun <T : ObjectMapper> setUpMapper(objectMapper: T): T {
+            with(objectMapper) {
+                registerKotlinModule()
+                registerModule(JavaTimeModule())
+                configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
+            }
+            return objectMapper
         }
     }
 }

@@ -9,6 +9,11 @@ coverage:
         threshold: 1%
         flags:
           - common
+      http:
+        target: auto
+        threshold: 1%
+        flags:
+          - http
       jackson:
         target: auto
         threshold: 1%
@@ -27,6 +32,12 @@ coverage:
         base: auto
         flags:
           - common
+      http:
+        target: 80
+        threshold: 1%
+        base: auto
+        flags:
+          - http
       jackson:
         target: 80
         threshold: 1%
@@ -53,6 +64,10 @@ flags:
   common:
     paths:
       - interop-common/
+    carryforward: true
+  http:
+    paths:
+      - interop-common-http/
     carryforward: true
   jackson:
     paths:

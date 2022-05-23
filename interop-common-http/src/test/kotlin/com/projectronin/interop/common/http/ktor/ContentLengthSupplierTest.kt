@@ -1,4 +1,4 @@
-package com.projectronin.interop.common.spring
+package com.projectronin.interop.common.http.ktor
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
