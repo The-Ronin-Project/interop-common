@@ -71,4 +71,13 @@ class JacksonManagerTest {
             objectMapper.serializationConfig.defaultPropertyInclusion.valueInclusion
         )
     }
+
+    @Test
+    fun `alternate object mapper serializes non-empty fields`() {
+        val objectMapper = JacksonManager.nonAbsentObjectMapper
+        assertEquals(
+            JsonInclude.Include.NON_ABSENT,
+            objectMapper.serializationConfig.defaultPropertyInclusion.valueInclusion
+        )
+    }
 }

@@ -19,15 +19,23 @@ class JacksonManager {
         val objectMapper = setUpMapper(jsonMapper())
 
         /**
+         * Alternate JSON object mapper for Jackson which will serialize empty fields
+         */
+        val nonAbsentObjectMapper = setUpMapper(jsonMapper(), JsonInclude.Include.NON_ABSENT)
+
+        /**
          * Sets up the supplied [objectMapper] with the required details for using Jackson within Interops.
          */
-        fun <T : ObjectMapper> setUpMapper(objectMapper: T): T {
+        fun <T : ObjectMapper> setUpMapper(
+            objectMapper: T,
+            jsonInclude: JsonInclude.Include = JsonInclude.Include.NON_EMPTY
+        ): T {
             with(objectMapper) {
                 registerKotlinModule()
                 registerModule(JavaTimeModule())
                 configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
+                setSerializationInclusion(jsonInclude)
             }
             return objectMapper
         }
