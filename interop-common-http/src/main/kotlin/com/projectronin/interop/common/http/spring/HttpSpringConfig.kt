@@ -17,6 +17,9 @@ class HttpSpringConfig {
     @Bean
     @Primary
     fun getHttpClient(): HttpClient {
+        // Now that we're handling exceptions directly, we no longer want to set the expectSuccess flag.
+        // Doing so causes Ktor to throw a general exception before we can read the Http response status and
+        // decide what to do with it.  See https://ktor.io/docs/response-validation.html
         return HttpClient(CIO) {
             install(ContentNegotiation) {
                 jackson {
@@ -27,7 +30,6 @@ class HttpSpringConfig {
             install(Logging) {
                 level = LogLevel.ALL
             }
-            expectSuccess = true
         }
     }
 }

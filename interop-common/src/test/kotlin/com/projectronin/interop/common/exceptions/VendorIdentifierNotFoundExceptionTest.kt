@@ -1,5 +1,4 @@
-package com.projectronin.interop.common.exception
-import com.projectronin.interop.common.exceptions.VendorIdentifierNotFoundException
+package com.projectronin.interop.common.exceptions
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
