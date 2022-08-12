@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    implementation(libs.ktor.client.core)
+
     testImplementation(libs.mockk)
     testImplementation(libs.ktor.client.mock)
 }

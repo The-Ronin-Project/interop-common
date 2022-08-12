@@ -41,7 +41,7 @@ class ContentLengthSupplier {
                     }.channel
 
                     val text = runCatching { readChannel.readRemaining().readText(Charsets.UTF_8) }.getOrElse {
-                        logger.error(it) { "Error while calculating the Content-Length" }
+                        logger.warn(it) { "Error while calculating the Content-Length" }
                         throw it
                     }
 

@@ -1,6 +1,6 @@
 package com.projectronin.interop.common.logmarkers
 
-import com.projectronin.interop.common.exceptions.ServiceUnavailableException
+import com.projectronin.interop.common.exceptions.LogMarkingException
 import org.slf4j.Marker
 
 /**
@@ -8,7 +8,7 @@ import org.slf4j.Marker
  */
 fun Throwable.getLogMarker(): Marker? {
     return when (this) {
-        is ServiceUnavailableException -> LogMarkers.SERVICE_UNAVAILABLE
+        is LogMarkingException -> this.logMarker
         else -> null
     }
 }

@@ -5,6 +5,8 @@ plugins {
 
 dependencies {
     implementation(project(":interop-common-jackson"))
+    implementation(project(":interop-common"))
+
     implementation("org.springframework:spring-context")
 
     implementation(libs.ktor.client.core)
