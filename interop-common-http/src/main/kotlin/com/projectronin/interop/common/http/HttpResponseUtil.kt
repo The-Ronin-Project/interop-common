@@ -1,4 +1,4 @@
-package com.projectronin.interop.common.http.ktor
+package com.projectronin.interop.common.http
 
 import com.projectronin.interop.common.http.exceptions.ClientAuthenticationException
 import com.projectronin.interop.common.http.exceptions.ClientFailureException

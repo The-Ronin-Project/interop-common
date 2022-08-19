@@ -4,7 +4,6 @@ import com.projectronin.interop.common.http.exceptions.ClientAuthenticationExcep
 import com.projectronin.interop.common.http.exceptions.ClientFailureException
 import com.projectronin.interop.common.http.exceptions.ServerFailureException
 import com.projectronin.interop.common.http.exceptions.ServiceUnavailableException
-import com.projectronin.interop.common.http.ktor.throwExceptionFromHttpStatus
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
 import io.ktor.http.HttpStatusCode

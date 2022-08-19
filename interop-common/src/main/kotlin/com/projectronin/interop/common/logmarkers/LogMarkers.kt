@@ -38,6 +38,11 @@ object LogMarkers {
      */
     val TENANT_SERVER_FAILURE: Marker = MarkerFactory.getMarker("TENANT_SERVER_FAILURE")
 
+    /**
+     * Something failed with a database operation, i.e Tenant or EHR config.
+     */
+    val DATABASE_FAILURE: Marker = MarkerFactory.getMarker("DATABASE_FAILURE")
+
     // Some log markers need to reference each other.
     init {
         SERVICE_UNAVAILABLE.add(EXCLUDE_FROM_GENERAL_ALERTS)
