@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.jackson.annotations)
-    implementation(libs.jackson.databind)
-    implementation(libs.jackson.datatype.jsr310)
-    implementation(libs.jackson.module.kotlin)
+    api(libs.jackson.annotations)
+    api(libs.jackson.databind)
+    api(libs.jackson.datatype.jsr310)
+    api(libs.jackson.module.kotlin)
 }

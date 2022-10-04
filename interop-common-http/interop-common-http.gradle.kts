@@ -4,16 +4,16 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":interop-common-jackson"))
-    implementation(project(":interop-common"))
+    api(project(":interop-common-jackson"))
+    api(project(":interop-common"))
+
+    api(libs.ktor.client.core)
+    api(libs.ktor.client.okhttp)
+    api(libs.ktor.client.content.negotiation)
+    api(libs.ktor.client.logging)
+    api(libs.ktor.serialization.jackson)
 
     implementation("org.springframework:spring-context")
-
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.okhttp)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.client.logging)
-    implementation(libs.ktor.serialization.jackson)
 
     testImplementation(libs.mockk)
     testImplementation(libs.ktor.client.mock)
