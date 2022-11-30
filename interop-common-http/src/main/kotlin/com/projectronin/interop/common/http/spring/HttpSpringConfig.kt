@@ -4,6 +4,7 @@ import com.projectronin.interop.common.http.ktor.ContentLengthSupplier
 import com.projectronin.interop.common.jackson.JacksonManager
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
@@ -29,6 +30,12 @@ class HttpSpringConfig {
             install(ContentLengthSupplier)
             install(Logging) {
                 level = LogLevel.ALL
+            }
+            install(HttpRequestRetry) {
+                // This will cause a retry for a 5xx error or an exception received during the request.
+                retryOnExceptionOrServerErrors(3)
+                // Retries after a 1-2s delay
+                constantDelay(millis = 1000, randomizationMs = 1000)
             }
         }
     }
