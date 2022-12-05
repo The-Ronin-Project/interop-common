@@ -18,5 +18,6 @@ class LogMarkersTest {
         assertNotNull(LogMarkers.AUTHORIZATION)
         assertNotNull(LogMarkers.CLIENT_FAILURE)
         assertNotNull(LogMarkers.TENANT_SERVER_FAILURE)
+        assertNotNull(LogMarkers.HTTP_REQUEST_FAILURE)
     }
 }

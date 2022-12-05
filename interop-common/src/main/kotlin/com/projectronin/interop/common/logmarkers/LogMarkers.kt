@@ -43,6 +43,11 @@ object LogMarkers {
      */
     val DATABASE_FAILURE: Marker = MarkerFactory.getMarker("DATABASE_FAILURE")
 
+    /**
+     * An exception occurred during an HTTP Request.
+     */
+    val HTTP_REQUEST_FAILURE: Marker = MarkerFactory.getMarker("HTTP_REQUEST_FAILURE")
+
     // Some log markers need to reference each other.
     init {
         SERVICE_UNAVAILABLE.add(EXCLUDE_FROM_GENERAL_ALERTS)
