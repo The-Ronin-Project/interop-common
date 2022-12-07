@@ -7,6 +7,6 @@ class VendorTypeTest {
     @Test
     fun `all vendor types available`() {
         val allValues = VendorType.values()
-        assertEquals(1, allValues.size)
+        assertEquals(2, allValues.size)
     }
 }
