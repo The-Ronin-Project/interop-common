@@ -10,8 +10,13 @@ ktor-client-mock = "io.ktor:ktor-client-mock:2.2.2"
 ktor-client-okhttp = "io.ktor:ktor-client-okhttp:2.2.2"
 ktor-serialization-jackson = "io.ktor:ktor-serialization-jackson:2.2.2"
 ktorm-core = "org.ktorm:ktorm-core:3.5.0"
+liquibase-core = "org.liquibase:liquibase-core:4.19.0"
 mockk = "io.mockk:mockk:1.13.3"
 mockwebserver = "com.squareup.okhttp3:mockwebserver:4.10.0"
-liquibase-core = "org.liquibase:liquibase-core:4.19.0"
+mysql-connector-java = "com.mysql:mysql-connector-j:8.0.31"
 rider-junit5 = "com.github.database-rider:rider-junit5:1.35.1"
 testcontainers-bom = "org.testcontainers:testcontainers-bom:1.17.6"
+testcontainers-mysql = "org.testcontainers:mysql:1.17.6"
+
+[bundles]
+test-mysql = ["mysql-connector-java", "testcontainers-mysql"]

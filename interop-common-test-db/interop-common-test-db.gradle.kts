@@ -1,3 +1,7 @@
+plugins {
+    id("com.projectronin.interop.gradle.junit")
+}
+
 dependencies {
     api(libs.ktorm.core)
 
@@ -9,4 +13,6 @@ dependencies {
     api(libs.rider.junit5)
 
     testImplementation(libs.mockk)
+
+    testRuntimeOnly(libs.bundles.test.mysql)
 }
