@@ -1,5 +1,5 @@
 [libraries]
-jackson-annotations = "com.fasterxml.jackson.core:jackson-annotations:2.14.1"
+jackson-annotations = "com.fasterxml.jackson.core:jackson-annotations:2.14.2"
 jackson-databind = "com.fasterxml.jackson.core:jackson-databind:2.14.1"
 jackson-datatype-jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1"
 jackson-module-kotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1"
