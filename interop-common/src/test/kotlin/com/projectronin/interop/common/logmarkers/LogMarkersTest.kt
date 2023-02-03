@@ -8,6 +8,7 @@ class LogMarkersTest {
     @Test
     fun `markers references are set`() {
         assertTrue(LogMarkers.SERVICE_UNAVAILABLE.contains(LogMarkers.EXCLUDE_FROM_GENERAL_ALERTS))
+        assertTrue(LogMarkers.AUTHORIZATION.contains(LogMarkers.EXCLUDE_FROM_GENERAL_ALERTS))
     }
 
     @Test

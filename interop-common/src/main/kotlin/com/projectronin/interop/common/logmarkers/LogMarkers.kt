@@ -51,5 +51,6 @@ object LogMarkers {
     // Some log markers need to reference each other.
     init {
         SERVICE_UNAVAILABLE.add(EXCLUDE_FROM_GENERAL_ALERTS)
+        AUTHORIZATION.add(EXCLUDE_FROM_GENERAL_ALERTS)
     }
 }
