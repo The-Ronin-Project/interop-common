@@ -1,7 +1,7 @@
 name: Interop Common HTTP Tests
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
 jobs:
   build:
