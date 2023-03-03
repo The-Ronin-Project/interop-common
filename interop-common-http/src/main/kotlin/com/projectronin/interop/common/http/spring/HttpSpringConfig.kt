@@ -32,8 +32,14 @@ class HttpSpringConfig {
                 level = LogLevel.ALL
             }
             install(HttpRequestRetry) {
+                val maxRetries = 3
+
                 // This will cause a retry for a 5xx error or an exception received during the request.
-                retryOnExceptionOrServerErrors(3)
+                // No longer using retryOnExceptionOrServerErrors() as it doesn't retry on timeout exceptions. Instead,
+                // breaking it up into two settings.
+                retryOnException(maxRetries, true)
+                retryOnServerErrors(maxRetries)
+
                 // Retries after a 1-2s delay
                 constantDelay(millis = 1000, randomizationMs = 1000)
             }
