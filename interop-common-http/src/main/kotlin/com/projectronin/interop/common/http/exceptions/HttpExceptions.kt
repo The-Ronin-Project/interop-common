@@ -6,7 +6,7 @@ import io.ktor.http.HttpStatusCode
 abstract class HttpException(
     status: HttpStatusCode,
     serverName: String,
-    serviceName: String?,
+    serviceName: String?
 ) : LogMarkingException(
     "Received $status when calling $serverName"
         .appendIfNotNull(serviceName) { " for $serviceName" }
@@ -18,7 +18,7 @@ abstract class HttpException(
 class ServerFailureException(
     status: HttpStatusCode,
     serverName: String,
-    serviceName: String? = null,
+    serviceName: String? = null
 ) : HttpException(status, serverName, serviceName) {
     override val logMarker = LogMarkers.SERVER_FAILURE
 }
@@ -30,7 +30,7 @@ class ServerFailureException(
 class ClientFailureException(
     status: HttpStatusCode,
     serverName: String,
-    serviceName: String? = null,
+    serviceName: String? = null
 ) : HttpException(status, serverName, serviceName) {
     override val logMarker = LogMarkers.CLIENT_FAILURE
 }
@@ -41,7 +41,7 @@ class ClientFailureException(
 class ClientAuthenticationException(
     status: HttpStatusCode,
     serverName: String,
-    serviceName: String? = null,
+    serviceName: String? = null
 ) : HttpException(status, serverName, serviceName) {
     override val logMarker = LogMarkers.AUTHORIZATION
 }
@@ -52,7 +52,7 @@ class ClientAuthenticationException(
 class ServiceUnavailableException(
     status: HttpStatusCode,
     serverName: String,
-    serviceName: String? = null,
+    serviceName: String? = null
 ) : HttpException(status, serverName, serviceName) {
     override val logMarker = LogMarkers.SERVICE_UNAVAILABLE
 }

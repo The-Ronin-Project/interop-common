@@ -12,6 +12,7 @@ class ThrowableExtensionTest {
         val marker = exception.getLogMarker()
         assertEquals(LogMarkers.TENANT_SERVER_FAILURE, marker)
     }
+
     @Test
     fun `unknown exception returns null`() {
         val exception = Exception("exception")

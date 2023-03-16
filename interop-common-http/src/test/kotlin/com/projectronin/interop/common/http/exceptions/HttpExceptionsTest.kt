@@ -13,7 +13,8 @@ class HttpExceptionsTest {
     @Test
     fun `serviceUnavailableException creates exception message correctly`() {
         val exception = ServiceUnavailableException(
-            HttpStatusCode.ServiceUnavailable, "Fake Server"
+            HttpStatusCode.ServiceUnavailable,
+            "Fake Server"
         )
         assertEquals(defaultMessage, exception.message)
     }
@@ -21,7 +22,9 @@ class HttpExceptionsTest {
     @Test
     fun `serviceUnavailableException creates exception message correctly with extra information`() {
         val exception = ServiceUnavailableException(
-            HttpStatusCode.ServiceUnavailable, "Fake Server", "API"
+            HttpStatusCode.ServiceUnavailable,
+            "Fake Server",
+            "API"
         )
         assertEquals(extendedMessage, exception.message)
     }
@@ -29,7 +32,8 @@ class HttpExceptionsTest {
     @Test
     fun `ClientAuthenticationException creates exception message correctly`() {
         val exception = ClientAuthenticationException(
-            HttpStatusCode.ServiceUnavailable, "Fake Server"
+            HttpStatusCode.ServiceUnavailable,
+            "Fake Server"
         )
         assertEquals(defaultMessage, exception.message)
     }
@@ -37,7 +41,9 @@ class HttpExceptionsTest {
     @Test
     fun `ClientAuthenticationException creates exception message correctly with extra information`() {
         val exception = ClientAuthenticationException(
-            HttpStatusCode.ServiceUnavailable, "Fake Server", "API"
+            HttpStatusCode.ServiceUnavailable,
+            "Fake Server",
+            "API"
         )
         assertEquals(extendedMessage, exception.message)
     }
@@ -45,7 +51,8 @@ class HttpExceptionsTest {
     @Test
     fun `ServerFailureException creates exception message correctly`() {
         val exception = ServerFailureException(
-            HttpStatusCode.ServiceUnavailable, "Fake Server"
+            HttpStatusCode.ServiceUnavailable,
+            "Fake Server"
         )
         assertEquals(defaultMessage, exception.message)
     }
@@ -53,7 +60,9 @@ class HttpExceptionsTest {
     @Test
     fun `ServerFailureException creates exception message correctly with extra information`() {
         val exception = ServerFailureException(
-            HttpStatusCode.ServiceUnavailable, "Fake Server", "API"
+            HttpStatusCode.ServiceUnavailable,
+            "Fake Server",
+            "API"
         )
         assertEquals(extendedMessage, exception.message)
     }
@@ -61,7 +70,8 @@ class HttpExceptionsTest {
     @Test
     fun `ClientFailureException creates exception message correctly`() {
         val exception = ClientFailureException(
-            HttpStatusCode.ServiceUnavailable, "Fake Server"
+            HttpStatusCode.ServiceUnavailable,
+            "Fake Server"
         )
         assertEquals(defaultMessage, exception.message)
     }
@@ -69,7 +79,9 @@ class HttpExceptionsTest {
     @Test
     fun `ClientFailureException creates exception message correctly with extra information`() {
         val exception = ClientFailureException(
-            HttpStatusCode.ServiceUnavailable, "Fake Server", "API"
+            HttpStatusCode.ServiceUnavailable,
+            "Fake Server",
+            "API"
         )
         assertEquals(extendedMessage, exception.message)
     }
@@ -77,7 +89,9 @@ class HttpExceptionsTest {
     @Test
     fun `service unavailable exception returns correct marker`() {
         val exception = ServiceUnavailableException(
-            HttpStatusCode.ServiceUnavailable, "fake server", null
+            HttpStatusCode.ServiceUnavailable,
+            "fake server",
+            null
         )
         val marker = exception.getLogMarker()!!
         assertEquals(marker, LogMarkers.SERVICE_UNAVAILABLE)
@@ -86,7 +100,9 @@ class HttpExceptionsTest {
     @Test
     fun `client authorization exception returns correct marker`() {
         val exception = ClientAuthenticationException(
-            HttpStatusCode.ServiceUnavailable, "fake server", null,
+            HttpStatusCode.ServiceUnavailable,
+            "fake server",
+            null
         )
         val marker = exception.getLogMarker()!!
         assertEquals(marker, LogMarkers.AUTHORIZATION)
@@ -95,7 +111,9 @@ class HttpExceptionsTest {
     @Test
     fun `client exception returns correct marker`() {
         val exception = ClientFailureException(
-            HttpStatusCode.ServiceUnavailable, "fake server", null,
+            HttpStatusCode.ServiceUnavailable,
+            "fake server",
+            null
         )
         val marker = exception.getLogMarker()!!
         assertEquals(marker, LogMarkers.CLIENT_FAILURE)
@@ -104,7 +122,9 @@ class HttpExceptionsTest {
     @Test
     fun `server exception returns correct marker`() {
         val exception = ServerFailureException(
-            HttpStatusCode.ServiceUnavailable, "fake server", null,
+            HttpStatusCode.ServiceUnavailable,
+            "fake server",
+            null
         )
         val marker = exception.getLogMarker()!!
         assertEquals(marker, LogMarkers.SERVER_FAILURE)

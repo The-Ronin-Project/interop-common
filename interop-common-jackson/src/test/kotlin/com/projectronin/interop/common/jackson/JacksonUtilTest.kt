@@ -31,7 +31,7 @@ internal class JacksonUtilTest {
 }
 
 private data class ExampleObject(
-    val first: String,
+    val first: String
 )
 
 private data class ExampleSecondObject(
