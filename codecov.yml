@@ -19,6 +19,11 @@ coverage:
         threshold: 1%
         flags:
           - jackson
+      ktorm:
+        target: auto
+        threshold: 1%
+        flags:
+          - ktorm
       test-db:
         target: auto
         threshold: 1%
@@ -44,6 +49,12 @@ coverage:
         base: auto
         flags:
           - jackson
+      ktorm:
+        target: 80
+        threshold: 1%
+        base: auto
+        flags:
+          - ktorm
       test-db:
         target: 80
         threshold: 1%
@@ -72,6 +83,10 @@ flags:
   jackson:
     paths:
       - interop-common-jackson/
+    carryforward: true
+  ktorm:
+    paths:
+      - interop-common-ktorm/
     carryforward: true
   test-db:
     paths:

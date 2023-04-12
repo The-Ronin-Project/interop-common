@@ -3,6 +3,7 @@ rootProject.name = "interop-common-build"
 include("interop-common")
 include("interop-common-http")
 include("interop-common-jackson")
+include("interop-common-ktorm")
 include("interop-common-test-db")
 
 for (project in rootProject.children) {
