@@ -5,5 +5,6 @@ package com.projectronin.interop.common.hl7
  */
 enum class EventType {
     MDMT02,
-    MDMT06
+    MDMT06,
+    MDMT08
 }

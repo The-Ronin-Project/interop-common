@@ -7,6 +7,6 @@ class EventTypeTest {
     @Test
     fun `all event types available`() {
         val allValues = EventType.values()
-        assertEquals(2, allValues.size)
+        assertEquals(3, allValues.size)
     }
 }
