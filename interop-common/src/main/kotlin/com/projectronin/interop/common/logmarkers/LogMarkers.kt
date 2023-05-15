@@ -48,9 +48,15 @@ object LogMarkers {
      */
     val HTTP_REQUEST_FAILURE: Marker = MarkerFactory.getMarker("HTTP_REQUEST_FAILURE")
 
+    /**
+     * An illegal argument was provided to a service.
+     */
+    val ILLEGAL_ARGUMENT: Marker = MarkerFactory.getMarker("ILLEGAL_ARGUMENT")
+
     // Some log markers need to reference each other.
     init {
         SERVICE_UNAVAILABLE.add(EXCLUDE_FROM_GENERAL_ALERTS)
         AUTHORIZATION.add(EXCLUDE_FROM_GENERAL_ALERTS)
+        ILLEGAL_ARGUMENT.add(EXCLUDE_FROM_GENERAL_ALERTS)
     }
 }

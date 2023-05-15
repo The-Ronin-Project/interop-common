@@ -9,6 +9,7 @@ class LogMarkersTest {
     fun `markers references are set`() {
         assertTrue(LogMarkers.SERVICE_UNAVAILABLE.contains(LogMarkers.EXCLUDE_FROM_GENERAL_ALERTS))
         assertTrue(LogMarkers.AUTHORIZATION.contains(LogMarkers.EXCLUDE_FROM_GENERAL_ALERTS))
+        assertTrue(LogMarkers.ILLEGAL_ARGUMENT.contains(LogMarkers.EXCLUDE_FROM_GENERAL_ALERTS))
     }
 
     @Test
@@ -20,5 +21,6 @@ class LogMarkersTest {
         assertNotNull(LogMarkers.CLIENT_FAILURE)
         assertNotNull(LogMarkers.TENANT_SERVER_FAILURE)
         assertNotNull(LogMarkers.HTTP_REQUEST_FAILURE)
+        assertNotNull(LogMarkers.ILLEGAL_ARGUMENT)
     }
 }
