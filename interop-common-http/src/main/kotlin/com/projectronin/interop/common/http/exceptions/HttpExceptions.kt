@@ -1,10 +1,11 @@
 package com.projectronin.interop.common.http.exceptions
+
 import com.projectronin.interop.common.exceptions.LogMarkingException
 import com.projectronin.interop.common.logmarkers.LogMarkers
 import io.ktor.http.HttpStatusCode
 
 abstract class HttpException(
-    status: HttpStatusCode,
+    val status: HttpStatusCode,
     serverName: String,
     serviceName: String?
 ) : LogMarkingException(
