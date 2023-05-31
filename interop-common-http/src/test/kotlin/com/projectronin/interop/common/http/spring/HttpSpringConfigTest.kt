@@ -1,7 +1,10 @@
 package com.projectronin.interop.common.http.spring
 
+import com.projectronin.interop.common.http.NO_RETRY_HEADER
+import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
+import io.ktor.client.request.headers
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
@@ -12,6 +15,7 @@ import okhttp3.mockwebserver.SocketPolicy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class HttpSpringConfigTest {
     @Test
@@ -65,6 +69,51 @@ class HttpSpringConfigTest {
         assertEquals(HttpStatusCode.ServiceUnavailable, response.status)
 
         assertEquals(4, mockWebServer.requestCount)
+
+        mockWebServer.shutdown()
+    }
+
+    @Test
+    fun `http client ignores retry on socket timeout if no retry header is set`() {
+        val mockWebServer = MockWebServer()
+        mockWebServer.enqueue(MockResponse().setSocketPolicy(SocketPolicy.NO_RESPONSE))
+
+        mockWebServer.start()
+
+        assertThrows<SocketTimeoutException> {
+            runBlocking {
+                HttpSpringConfig().getHttpClient().get(mockWebServer.url("/test").toString()) {
+                    headers {
+                        append(NO_RETRY_HEADER, "true")
+                    }
+                    accept(ContentType.Application.Json)
+                }
+            }
+        }
+
+        assertEquals(1, mockWebServer.requestCount)
+
+        mockWebServer.shutdown()
+    }
+
+    @Test
+    fun `http client ignores retry on 500 if no retry header is set`() {
+        val mockWebServer = MockWebServer()
+        mockWebServer.enqueue(MockResponse().setResponseCode(500))
+
+        mockWebServer.start()
+
+        val response = runBlocking {
+            HttpSpringConfig().getHttpClient().get(mockWebServer.url("/test").toString()) {
+                headers {
+                    append(NO_RETRY_HEADER, "true")
+                }
+                accept(ContentType.Application.Json)
+            }
+        }
+        assertEquals(HttpStatusCode.InternalServerError, response.status)
+
+        assertEquals(1, mockWebServer.requestCount)
 
         mockWebServer.shutdown()
     }

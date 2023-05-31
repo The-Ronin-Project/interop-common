@@ -1,17 +1,23 @@
 package com.projectronin.interop.common.http.spring
 
 import com.projectronin.interop.common.http.ktor.ContentLengthSupplier
+import com.projectronin.interop.common.http.retry
 import com.projectronin.interop.common.jackson.JacksonManager
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.network.sockets.ConnectTimeoutException
+import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.HttpRequestRetry
+import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.utils.unwrapCancellationException
 import io.ktor.serialization.jackson.jackson
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import java.util.concurrent.CancellationException
 
 @Configuration
 class HttpSpringConfig {
@@ -34,11 +40,26 @@ class HttpSpringConfig {
             install(HttpRequestRetry) {
                 val maxRetries = 3
 
-                // This will cause a retry for a 5xx error or an exception received during the request.
-                // No longer using retryOnExceptionOrServerErrors() as it doesn't retry on timeout exceptions. Instead,
-                // breaking it up into two settings.
-                retryOnException(maxRetries, true)
-                retryOnServerErrors(maxRetries)
+                // The following are effectively the logic built into the retry, but with our own initial
+                // check for whether the request should retry or not.
+                retryOnExceptionIf { httpRequestBuilder, cause ->
+                    if (httpRequestBuilder.retry()) {
+                        when (cause.unwrapCancellationException()) {
+                            // If the underlying exception is a timeout, then retry
+                            is HttpRequestTimeoutException,
+                            is ConnectTimeoutException,
+                            is SocketTimeoutException -> true
+
+                            // Else, retry if the cause was not a cancellation.
+                            else -> cause !is CancellationException
+                        }
+                    } else {
+                        false
+                    }
+                }
+                retryIf(maxRetries) { httpRequest, httpResponse ->
+                    httpRequest.retry() && httpResponse.status.value.let { it in 500..599 }
+                }
 
                 // Retries after a 1-2s delay
                 constantDelay(millis = 1000, randomizationMs = 1000)
