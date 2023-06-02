@@ -49,6 +49,11 @@ object LogMarkers {
     val HTTP_REQUEST_FAILURE: Marker = MarkerFactory.getMarker("HTTP_REQUEST_FAILURE")
 
     /**
+     * Validation warning or failure has occurred.
+     */
+    val VALIDATION_ISSUE: Marker = MarkerFactory.getMarker("VALIDATION_ISSUE")
+
+    /**
      * An illegal argument was provided to a service.
      */
     val ILLEGAL_ARGUMENT: Marker = MarkerFactory.getMarker("ILLEGAL_ARGUMENT")
@@ -57,6 +62,7 @@ object LogMarkers {
     init {
         SERVICE_UNAVAILABLE.add(EXCLUDE_FROM_GENERAL_ALERTS)
         AUTHORIZATION.add(EXCLUDE_FROM_GENERAL_ALERTS)
+        VALIDATION_ISSUE.add(EXCLUDE_FROM_GENERAL_ALERTS)
         ILLEGAL_ARGUMENT.add(EXCLUDE_FROM_GENERAL_ALERTS)
     }
 }
