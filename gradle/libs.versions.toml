@@ -15,8 +15,8 @@ mockk = "io.mockk:mockk:1.13.5"
 mockwebserver = "com.squareup.okhttp3:mockwebserver:4.11.0"
 mysql-connector-java = "com.mysql:mysql-connector-j:8.0.33"
 rider-junit5 = "com.github.database-rider:rider-junit5:1.37.1"
-testcontainers-bom = "org.testcontainers:testcontainers-bom:1.18.1"
-testcontainers-mysql = "org.testcontainers:mysql:1.18.1"
+testcontainers-bom = "org.testcontainers:testcontainers-bom:1.18.3"
+testcontainers-mysql = "org.testcontainers:mysql:1.18.3"
 uuid-creator = "com.github.f4b6a3:uuid-creator:5.3.2"
 
 [bundles]
