@@ -11,12 +11,6 @@ for (project in rootProject.children) {
 }
 
 pluginManagement {
-    plugins {
-        id("com.projectronin.interop.gradle.base") version "3.0.0"
-        id("com.projectronin.interop.gradle.publish") version "3.0.0"
-        id("com.projectronin.interop.gradle.version") version "3.0.0"
-    }
-
     repositories {
         maven {
             url = uri("https://repo.devops.projectronin.io/repository/maven-snapshots/")

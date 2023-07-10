@@ -1,23 +1,45 @@
+[versions]
+dbrider = "1.38.1"
+interop-gradle = "3.2.0"
+jackson = "2.15.2"
+ktor = "2.3.1"
+ktorm = "3.6.0"
+liquibase = "4.23.0"
+mockk = "1.13.5"
+mockwebserver = "4.11.0"
+mysql = "8.0.33"
+testcontainers = "1.18.3"
+uuid-creator = "5.3.2"
+
 [libraries]
-jackson-annotations = "com.fasterxml.jackson.core:jackson-annotations:2.15.2"
-jackson-databind = "com.fasterxml.jackson.core:jackson-databind:2.15.2"
-jackson-datatype-jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2"
-jackson-module-kotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2"
-ktor-client-core = "io.ktor:ktor-client-core:2.3.1"
-ktor-client-content-negotiation = "io.ktor:ktor-client-content-negotiation:2.3.1"
-ktor-client-logging = "io.ktor:ktor-client-logging:2.3.1"
-ktor-client-mock = "io.ktor:ktor-client-mock:2.3.1"
-ktor-client-okhttp = "io.ktor:ktor-client-okhttp:2.3.1"
-ktor-serialization-jackson = "io.ktor:ktor-serialization-jackson:2.3.1"
-ktorm-core = "org.ktorm:ktorm-core:3.6.0"
-liquibase-core = "org.liquibase:liquibase-core:4.23.0"
-mockk = "io.mockk:mockk:1.13.5"
-mockwebserver = "com.squareup.okhttp3:mockwebserver:4.11.0"
-mysql-connector-java = "com.mysql:mysql-connector-j:8.0.33"
-rider-junit5 = "com.github.database-rider:rider-junit5:1.38.1"
-testcontainers-bom = "org.testcontainers:testcontainers-bom:1.18.3"
-testcontainers-mysql = "org.testcontainers:mysql:1.18.3"
-uuid-creator = "com.github.f4b6a3:uuid-creator:5.3.2"
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor" }
+ktorm-core = { module = "org.ktorm:ktorm-core", version.ref = "ktorm" }
+liquibase-core = { module = "org.liquibase:liquibase-core", version.ref = "liquibase" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "mockwebserver" }
+mysql-connector-java = { module = "com.mysql:mysql-connector-j", version.ref = "mysql" }
+rider-junit5 = { module = "com.github.database-rider:rider-junit5", version.ref = "dbrider" }
+testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version.ref = "testcontainers" }
+testcontainers-mysql = { module = "org.testcontainers:mysql", version.ref = "testcontainers" }
+uuid-creator = { module = "com.github.f4b6a3:uuid-creator", version.ref = "uuid-creator" }
 
 [bundles]
-test-mysql = ["mysql-connector-java", "testcontainers-mysql"]
+test-mysql = [
+    "mysql-connector-java",
+    "testcontainers-mysql"
+]
+
+[plugins]
+interop-junit = { id = "com.projectronin.interop.gradle.junit", version.ref = "interop-gradle" }
+interop-publish = { id = "com.projectronin.interop.gradle.publish", version.ref = "interop-gradle" }
+interop-spring = { id = "com.projectronin.interop.gradle.spring", version.ref = "interop-gradle" }
+interop-version = { id = "com.projectronin.interop.gradle.version", version.ref = "interop-gradle" }
