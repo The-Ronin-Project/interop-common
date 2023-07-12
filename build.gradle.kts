@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.interop.spring) apply false
     alias(libs.plugins.interop.publish) apply false
     alias(libs.plugins.interop.version)
+    alias(libs.plugins.interop.version.catalog)
 }
 
 subprojects {

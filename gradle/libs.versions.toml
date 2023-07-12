@@ -16,8 +16,8 @@ jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
@@ -35,7 +35,7 @@ uuid-creator = { module = "com.github.f4b6a3:uuid-creator", version.ref = "uuid-
 [bundles]
 test-mysql = [
     "mysql-connector-java",
-    "testcontainers-mysql"
+    "testcontainers-mysql",
 ]
 
 [plugins]
@@ -43,3 +43,4 @@ interop-junit = { id = "com.projectronin.interop.gradle.junit", version.ref = "i
 interop-publish = { id = "com.projectronin.interop.gradle.publish", version.ref = "interop-gradle" }
 interop-spring = { id = "com.projectronin.interop.gradle.spring", version.ref = "interop-gradle" }
 interop-version = { id = "com.projectronin.interop.gradle.version", version.ref = "interop-gradle" }
+interop-version-catalog = { id = "com.projectronin.interop.gradle.version-catalog-update", version.ref = "interop-gradle" }
