@@ -8,7 +8,7 @@ liquibase = "4.23.1"
 mockk = "1.13.7"
 mockwebserver = "4.11.0"
 mysql = "8.1.0"
-testcontainers = "1.18.3"
+testcontainers = "1.19.0"
 uuid-creator = "5.3.2"
 
 [libraries]
