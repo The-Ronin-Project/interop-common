@@ -1,5 +1,5 @@
 [versions]
-dbrider = "1.40.0"
+dbrider = "1.41.0"
 interop-gradle = "3.2.0"
 jackson = "2.15.2"
 ktor = "2.3.4"
