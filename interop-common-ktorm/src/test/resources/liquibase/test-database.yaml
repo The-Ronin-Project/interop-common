@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: sample-table-create
+      author: Sam Felt
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: tables
+      changes:
+        - createTable:
+            tableName: tables
+            columns:
+              - column:
+                  name: tables_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_tables
+              - column:
+                  name: her_job
+                  type: java.sql.Types.VARCHAR(10)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_stables_jer_job
