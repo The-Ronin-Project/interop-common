@@ -9,7 +9,7 @@ mockk = "1.13.8"
 mockwebserver = "4.11.0"
 mysql = "8.1.0"
 testcontainers = "1.19.0"
-uuid-creator = "5.3.4"
+uuid-creator = "5.3.5"
 
 [libraries]
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
