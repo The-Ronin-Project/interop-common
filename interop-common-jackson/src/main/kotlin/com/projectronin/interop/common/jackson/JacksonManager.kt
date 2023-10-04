@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jsonMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
@@ -35,7 +36,10 @@ class JacksonManager {
                 registerModule(JavaTimeModule())
                 configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                configure(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS, true)
                 setSerializationInclusion(jsonInclude)
+                // Sets the "bigDecimalExact" option to ensure BigDecimals are represented as they appear and trailing zeroes are not stripped
+                nodeFactory = JsonNodeFactory(true)
             }
             return objectMapper
         }

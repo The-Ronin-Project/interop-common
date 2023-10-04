@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertInstanceOf
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 import java.time.Instant
 import java.time.LocalTime
 
@@ -31,6 +32,15 @@ class JacksonManagerTest {
     fun `adds java time module`() {
         val objectMapper = JacksonManager.objectMapper
         assertTrue(objectMapper.registeredModuleIds.contains(JavaTimeModule().typeId))
+    }
+
+    @Test
+    fun `sets node factory to return exact big decimals`() {
+        val nodeFactory = JacksonManager.objectMapper.nodeFactory
+
+        val initial = BigDecimal("60.0")
+        val node = nodeFactory.numberNode(initial)
+        assertEquals("60.0", node.decimalValue().toString())
     }
 
     @Test
@@ -61,6 +71,12 @@ class JacksonManagerTest {
     fun `disables fail on unknown properties`() {
         val objectMapper = JacksonManager.objectMapper
         assertFalse(objectMapper.isEnabled(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES))
+    }
+
+    @Test
+    fun `enables treat floats as BigDecimal`() {
+        val objectMapper = JacksonManager.objectMapper
+        assertTrue(objectMapper.isEnabled(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS))
     }
 
     @Test
