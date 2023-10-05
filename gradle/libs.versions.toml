@@ -4,11 +4,11 @@ interop-gradle = "3.2.0"
 jackson = "2.15.2"
 ktor = "2.3.4"
 ktorm = "3.6.0"
-liquibase = "4.23.2"
+liquibase = "4.24.0"
 mockk = "1.13.8"
 mockwebserver = "4.11.0"
 mysql = "8.1.0"
-testcontainers = "1.19.0"
+testcontainers = "1.19.1"
 uuid-creator = "5.3.5"
 
 [libraries]
