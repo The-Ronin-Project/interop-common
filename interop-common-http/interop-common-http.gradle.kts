@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.interop.junit)
-    alias(libs.plugins.interop.spring)
 }
 
 dependencies {
@@ -14,7 +13,8 @@ dependencies {
     api(libs.ktor.serialization.jackson)
 
     implementation("org.springframework:spring-context")
-
+    implementation(platform(libs.spring.boot.parent))
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     testImplementation(libs.mockk)
     testImplementation(libs.ktor.client.mock)
     testImplementation(libs.mockwebserver)
