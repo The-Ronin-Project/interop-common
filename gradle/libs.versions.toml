@@ -1,7 +1,7 @@
 [versions]
 dbrider = "1.41.0"
 interop-gradle = "3.2.0"
-jackson = "2.15.2"
+jackson = "2.15.3"
 # @pin INT-2283
 ktor = "2.3.4"
 ktorm = "3.6.0"
