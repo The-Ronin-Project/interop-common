@@ -3,11 +3,11 @@ package com.projectronin.interop.common.http.auth
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class AuthenticationSpringConfigTest {
+class AuthenticationConfigTest {
 
     @Test
     fun `defaults work - but spring would prevent them`() {
-        val defaultConfig = AuthenticationSpringConfig()
+        val defaultConfig = AuthenticationConfig()
         assertEquals("", defaultConfig.token.url)
         assertEquals("", defaultConfig.audience)
         assertEquals("", defaultConfig.client.id)
@@ -17,7 +17,7 @@ class AuthenticationSpringConfigTest {
 
     @Test
     fun `defaults are 100 percent required bozo`() {
-        val authenticationSpringConfig = AuthenticationSpringConfig(
+        val authenticationSpringConfig = AuthenticationConfig(
             token = Token("auth"),
             audience = "aud",
             client = Client(id = "clientId", secret = "clientSecret"),

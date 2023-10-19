@@ -23,7 +23,7 @@ import java.time.Instant
  */
 class InteropAuthenticationService(
     private val client: HttpClient,
-    private val authConfig: AuthenticationSpringConfig
+    private val authConfig: AuthenticationConfig
 ) : BrokeredAuthenticator() {
 
     override fun reloadAuthentication(): Authentication = if (authConfig.method == AuthMethod.AUTH0) {

@@ -20,7 +20,7 @@ class InteropAuthenticationServiceTest {
     private val audience = "audience"
     private val clientId = "MyTestClientId"
     private val clientSecret = "SuperSecretAndSafe"
-    private val authenticationSpringConfig = AuthenticationSpringConfig(
+    private val authenticationSpringConfig = AuthenticationConfig(
         token = Token(authUrl),
         audience = audience,
         client = Client(id = clientId, secret = clientSecret),
@@ -77,7 +77,7 @@ class InteropAuthenticationServiceTest {
 
     @Test
     fun `retrieves form-based authentication`() {
-        val authenticationSpringConfig = AuthenticationSpringConfig(
+        val authenticationSpringConfig = AuthenticationConfig(
             token = Token(authUrl),
             audience = audience,
             client = Client(id = clientId, secret = clientSecret),
