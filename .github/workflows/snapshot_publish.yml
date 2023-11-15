@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 jobs:
   publish:
-    runs-on: self-hosted
+    runs-on: oci-shared
     steps:
       - uses: actions/checkout@v2
         with:
