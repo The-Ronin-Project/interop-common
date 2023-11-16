@@ -9,6 +9,7 @@ import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.HttpRequestTimeoutException
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
@@ -36,6 +37,9 @@ class HttpSpringConfig {
             install(ContentLengthSupplier)
             install(Logging) {
                 level = LogLevel.ALL
+            }
+            install(HttpTimeout) {
+                requestTimeoutMillis = 15000 // this is ktor's default
             }
             install(HttpRequestRetry) {
                 val maxRetries = 3
