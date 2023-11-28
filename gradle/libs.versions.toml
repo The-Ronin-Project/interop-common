@@ -11,7 +11,7 @@ mockwebserver = "4.12.0"
 mysql = "8.2.0"
 # @pin until can move to JDK 17
 spring-boot = "2.7.13"
-testcontainers = "1.19.2"
+testcontainers = "1.19.3"
 uuid-creator = "5.3.5"
 
 [libraries]
