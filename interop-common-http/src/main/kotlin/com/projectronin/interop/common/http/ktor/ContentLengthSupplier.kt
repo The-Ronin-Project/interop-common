@@ -29,21 +29,26 @@ class ContentLengthSupplier {
             return ContentLengthSupplier()
         }
 
-        override fun install(plugin: ContentLengthSupplier, scope: HttpClient) {
+        override fun install(
+            plugin: ContentLengthSupplier,
+            scope: HttpClient,
+        ) {
             scope.requestPipeline.insertPhaseAfter(HttpRequestPipeline.Transform, contentLengthPhase)
 
             scope.requestPipeline.intercept(contentLengthPhase) { content ->
                 if (content is OutputStreamContent && content.contentLength == null) {
                     logger.debug { "Found an OutputStreamContent with no ContentLength" }
 
-                    val readChannel = coroutineScope.writer(Dispatchers.IO) {
-                        content.writeTo(channel)
-                    }.channel
+                    val readChannel =
+                        coroutineScope.writer(Dispatchers.IO) {
+                            content.writeTo(channel)
+                        }.channel
 
-                    val text = runCatching { readChannel.readRemaining().readText(Charsets.UTF_8) }.getOrElse {
-                        logger.warn(it) { "Error while calculating the Content-Length" }
-                        throw it
-                    }
+                    val text =
+                        runCatching { readChannel.readRemaining().readText(Charsets.UTF_8) }.getOrElse {
+                            logger.warn(it) { "Error while calculating the Content-Length" }
+                            throw it
+                        }
 
                     val byteArrayContent = ByteArrayContent(text.toByteArray(), content.contentType)
                     proceedWith(byteArrayContent)

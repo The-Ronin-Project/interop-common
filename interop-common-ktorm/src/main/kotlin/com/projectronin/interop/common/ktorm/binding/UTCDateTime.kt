@@ -19,14 +19,21 @@ fun BaseTable<*>.utcDateTime(name: String): Column<OffsetDateTime> = registerCol
  * SqlType supporting storing an OffsetDateTime relative to UTC.
  */
 object UTCDateTimeSqlType : SqlType<OffsetDateTime>(Types.TIMESTAMP, "datetime") {
-    override fun doGetResult(rs: ResultSet, index: Int): OffsetDateTime? {
+    override fun doGetResult(
+        rs: ResultSet,
+        index: Int,
+    ): OffsetDateTime? {
         val timestamp = rs.getTimestamp(index)
         return timestamp?.let {
             OffsetDateTime.ofInstant(timestamp.toInstant(), ZoneOffset.UTC)
         }
     }
 
-    override fun doSetParameter(ps: PreparedStatement, index: Int, parameter: OffsetDateTime) {
+    override fun doSetParameter(
+        ps: PreparedStatement,
+        index: Int,
+        parameter: OffsetDateTime,
+    ) {
         ps.setTimestamp(index, Timestamp.from(parameter.toInstant()))
     }
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class DAOExceptionsTest {
-
     @Test
     fun `insert test`() {
         var exception = DatabaseInsertFailureException("EHR")

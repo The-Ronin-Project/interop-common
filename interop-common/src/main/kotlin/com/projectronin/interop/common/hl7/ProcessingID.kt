@@ -5,5 +5,5 @@ enum class ProcessingID(val abbreviation: String) {
     PRODUCTION("P"),
     TRAINING("T"),
     NONPRODUCTIONTESTING("N"),
-    VALIDATION("V")
+    VALIDATION("V"),
 }

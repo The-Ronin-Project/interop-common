@@ -16,7 +16,7 @@ class ReflectionUtilsTest {
         val exception = assertThrows<IllegalStateException> { copy(instance, mapOf("value" to "New Test")) }
         assertEquals(
             "Supplied instance does not represent a data class and cannot be copied",
-            exception.message
+            exception.message,
         )
     }
 
@@ -51,6 +51,6 @@ class ReflectionUtilsTest {
     data class SimpleDataClass(
         val value1: String,
         val value2: Int,
-        val nullable: String?
+        val nullable: String?,
     )
 }

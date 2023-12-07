@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 @LiquibaseTest(
     changeLog = "liquibase/test-database.yaml",
-    dbUrl = "jdbc:tc:mysql:8.0://localhost:3306/differentdatabase"
+    dbUrl = "jdbc:tc:mysql:8.0://localhost:3306/differentdatabase",
 )
 class KtormHelperNonDefaultTest {
     @DBRiderConnection

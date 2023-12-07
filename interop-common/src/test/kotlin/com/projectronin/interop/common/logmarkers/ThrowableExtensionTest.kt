@@ -19,6 +19,7 @@ class ThrowableExtensionTest {
         val marker = exception.getLogMarker()
         assertNull(marker)
     }
+
     private class TestException : LogMarkingException("Always bad!") {
         override val logMarker = LogMarkers.TENANT_SERVER_FAILURE
     }

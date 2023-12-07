@@ -8,7 +8,10 @@ object JacksonUtil {
     /**
      * Deserializes a json array into a List<> of [clazz].
      */
-    fun <T : Any> readJsonList(json: String, clazz: KClass<T>): List<T> {
+    fun <T : Any> readJsonList(
+        json: String,
+        clazz: KClass<T>,
+    ): List<T> {
         val type = mapper.typeFactory.constructCollectionType(List::class.java, clazz.java)
         return mapper.readValue(json, type)
     }
@@ -16,7 +19,10 @@ object JacksonUtil {
     /**
      * Deserializes a single json object of type [clazz]
      */
-    fun <T : Any> readJsonObject(json: String, clazz: KClass<T>): T {
+    fun <T : Any> readJsonObject(
+        json: String,
+        clazz: KClass<T>,
+    ): T {
         return mapper.readValue(json, clazz.java)
     }
 

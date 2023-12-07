@@ -19,19 +19,22 @@ import org.ktorm.schema.varchar
 class BaseInteropDAOTest {
     @DBRiderConnection
     lateinit var connectionHolder: ConnectionHolder
-    interface aDO : Entity<aDO> {
-        companion object : Entity.Factory<aDO>()
+
+    interface ADataObject : Entity<ADataObject> {
+        companion object : Entity.Factory<ADataObject>()
+
         var id: Int
         var whatDoesSheDo: String
     }
 
-    object table : Table<aDO>("tables") {
+    object ATable : Table<ADataObject>("tables") {
         var id = int("tables_id").bindTo { it.id }.primaryKey()
         var whatDoesSheDo = varchar("her_job").bindTo { it.whatDoesSheDo }
     }
-    class NotBasedInteropDAO(database: Database) : BaseInteropDAO<aDO, Int>(database) {
-        // override val baseTable = table
-        override val primaryKeyColumn = table.id
+
+    class NotBasedInteropDAO(database: Database) : BaseInteropDAO<ADataObject, Int>(database) {
+        // override val baseTable = ATable
+        override val primaryKeyColumn = ATable.id
     }
 
     @Test

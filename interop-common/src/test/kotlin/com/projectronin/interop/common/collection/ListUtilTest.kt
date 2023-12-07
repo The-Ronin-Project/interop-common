@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class ListUtilTest {
-
     @Test
     fun `associateWithNonNull with transform always returning null`() {
         val original = listOf(1, 2, 3, 4, 5)
@@ -15,9 +14,10 @@ class ListUtilTest {
     @Test
     fun `associateWithNonNull with transform sometimes returning null`() {
         val original = listOf(1, 2, 3, 4, 5)
-        val mapped = original.associateWithNonNull {
-            if (it % 2 == 1) null else "even"
-        }
+        val mapped =
+            original.associateWithNonNull {
+                if (it % 2 == 1) null else "even"
+            }
 
         assertEquals(2, mapped.size)
         assertEquals(mapOf(2 to "even", 4 to "even"), mapped)
@@ -26,9 +26,10 @@ class ListUtilTest {
     @Test
     fun `associateWithNonNull with transform never returning null`() {
         val original = listOf(1, 2, 3, 4, 5)
-        val mapped = original.associateWithNonNull {
-            it.toString()
-        }
+        val mapped =
+            original.associateWithNonNull {
+                it.toString()
+            }
 
         assertEquals(5, mapped.size)
         assertEquals(
@@ -37,18 +38,19 @@ class ListUtilTest {
                 2 to 2.toString(),
                 3 to 3.toString(),
                 4 to 4.toString(),
-                5 to 5.toString()
+                5 to 5.toString(),
             ),
-            mapped
+            mapped,
         )
     }
 
     @Test
     fun `associateWithNonNull with empty list`() {
         val original = emptyList<Any>()
-        val mapped = original.associateWithNonNull {
-            it.hashCode()
-        }
+        val mapped =
+            original.associateWithNonNull {
+                it.hashCode()
+            }
 
         assertEquals(0, mapped.size)
     }
@@ -64,9 +66,9 @@ class ListUtilTest {
                 "2" to Unit,
                 "3" to Unit,
                 "4" to Unit,
-                "5" to Unit
+                "5" to Unit,
             ),
-            mapped
+            mapped,
         )
     }
 
@@ -74,16 +76,17 @@ class ListUtilTest {
     fun `associateWithNonNull with non-unique elements in list`() {
         val original = listOf("1", "2", "3", "1")
         var iteration = 0
-        val mapped = original.associateWithNonNull {
-            ++iteration
-        }
+        val mapped =
+            original.associateWithNonNull {
+                ++iteration
+            }
         assertEquals(
             mapOf(
                 "1" to 4,
                 "2" to 2,
-                "3" to 3
+                "3" to 3,
             ),
-            mapped
+            mapped,
         )
     }
 }

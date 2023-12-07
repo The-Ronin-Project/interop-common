@@ -20,33 +20,37 @@ class LiquibaseExtensionTest {
 
     @Test
     fun `no test class`() {
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.empty()
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.empty()
+            }
 
         extension.beforeEach(context)
     }
 
     @Test
     fun `no test instances`() {
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(NoLiquibaseTest::class.java)
-            every { testInstances } returns Optional.empty()
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(NoLiquibaseTest::class.java)
+                every { testInstances } returns Optional.empty()
+            }
 
         extension.beforeEach(context)
     }
 
     @Test
     fun `no test instance for class`() {
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(NoLiquibaseTest::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(NoLiquibaseTest::class.java) } returns Optional.empty()
-                }
-            )
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(NoLiquibaseTest::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(NoLiquibaseTest::class.java) } returns Optional.empty()
+                        },
+                    )
+            }
 
         extension.beforeEach(context)
     }
@@ -55,14 +59,16 @@ class LiquibaseExtensionTest {
     fun `no liquibase test found`() {
         val instance = NoLiquibaseTest()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(NoLiquibaseTest::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(NoLiquibaseTest::class.java) } returns Optional.of(instance)
-                }
-            )
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(NoLiquibaseTest::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(NoLiquibaseTest::class.java) } returns Optional.of(instance)
+                        },
+                    )
+            }
 
         extension.beforeEach(context)
         assertNull(instance.connectionHolder)
@@ -72,14 +78,16 @@ class LiquibaseExtensionTest {
     fun `finds liquibase test on current class`() {
         val instance = LiquibaseTestOnClass()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestOnClass::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestOnClass::class.java) } returns Optional.of(instance)
-                }
-            )
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestOnClass::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestOnClass::class.java) } returns Optional.of(instance)
+                        },
+                    )
+            }
 
         extension.beforeEach(context)
         assertEquals(getExpectedConnectionHolder(), instance.connectionHolder)
@@ -89,14 +97,16 @@ class LiquibaseExtensionTest {
     fun `finds liquibase test on superclass`() {
         val instance = LiquibaseTestOnSuperClass()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance)
-                }
-            )
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance)
+                        },
+                    )
+            }
 
         extension.beforeEach(context)
         assertEquals(getExpectedConnectionHolder(), instance.connectionHolder)
@@ -106,14 +116,16 @@ class LiquibaseExtensionTest {
     fun `no marked member property`() {
         val instance = LiquibaseTestWithNoMarkedMember()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestWithNoMarkedMember::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestWithNoMarkedMember::class.java) } returns Optional.of(instance)
-                }
-            )
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestWithNoMarkedMember::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestWithNoMarkedMember::class.java) } returns Optional.of(instance)
+                        },
+                    )
+            }
 
         extension.beforeEach(context)
         assertNull(instance.connectionHolder)
@@ -123,16 +135,19 @@ class LiquibaseExtensionTest {
     fun `non-valid marked member property`() {
         val instance = LiquibaseTestWithDifferentlyMarkedMember()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestWithDifferentlyMarkedMember::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestWithDifferentlyMarkedMember::class.java) } returns Optional.of(
-                        instance
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestWithDifferentlyMarkedMember::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestWithDifferentlyMarkedMember::class.java) } returns
+                                Optional.of(
+                                    instance,
+                                )
+                        },
                     )
-                }
-            )
-        }
+            }
 
         extension.beforeEach(context)
         assertNull(instance.connectionHolder)
@@ -142,16 +157,19 @@ class LiquibaseExtensionTest {
     fun `no accessible member property`() {
         val instance = LiquibaseTestWithPrivateMarkedMember()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestWithPrivateMarkedMember::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestWithPrivateMarkedMember::class.java) } returns Optional.of(
-                        instance
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestWithPrivateMarkedMember::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestWithPrivateMarkedMember::class.java) } returns
+                                Optional.of(
+                                    instance,
+                                )
+                        },
                     )
-                }
-            )
-        }
+            }
 
         assertThrows<IllegalCallableAccessException> { extension.beforeEach(context) }
     }
@@ -160,16 +178,19 @@ class LiquibaseExtensionTest {
     fun `no mutable member property`() {
         val instance = LiquibaseTestWithImmutableMarkedMember()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestWithImmutableMarkedMember::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestWithImmutableMarkedMember::class.java) } returns Optional.of(
-                        instance
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestWithImmutableMarkedMember::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestWithImmutableMarkedMember::class.java) } returns
+                                Optional.of(
+                                    instance,
+                                )
+                        },
                     )
-                }
-            )
-        }
+            }
 
         extension.beforeEach(context)
         assertNull(instance.connectionHolder)
@@ -179,14 +200,16 @@ class LiquibaseExtensionTest {
     fun `sets same ConnectionHolder on subsequent calls`() {
         val instance = LiquibaseTestOnSuperClass()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance)
-                }
-            )
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance)
+                        },
+                    )
+            }
 
         extension.beforeEach(context)
         val expectedConnectionHolder = getExpectedConnectionHolder()
@@ -195,14 +218,16 @@ class LiquibaseExtensionTest {
         // We're going to verify this by actually using a totally different instance of the same class
         val instance2 = LiquibaseTestOnSuperClass()
 
-        val context2 = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance2)
-                }
-            )
-        }
+        val context2 =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance2)
+                        },
+                    )
+            }
 
         extension.beforeEach(context2)
         assertEquals(expectedConnectionHolder, instance2.connectionHolder)
@@ -213,14 +238,16 @@ class LiquibaseExtensionTest {
     fun `creates new connection if first one is closed`() {
         val instance = LiquibaseTestOnSuperClass()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance)
-                }
-            )
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance)
+                        },
+                    )
+            }
 
         extension.beforeEach(context)
         assertEquals(getExpectedConnectionHolder(), instance.connectionHolder)
@@ -231,14 +258,16 @@ class LiquibaseExtensionTest {
         // We're going to verify this by actually using a totally different instance of the same class
         val instance2 = LiquibaseTestOnSuperClass()
 
-        val context2 = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance2)
-                }
-            )
-        }
+        val context2 =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestOnSuperClass::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestOnSuperClass::class.java) } returns Optional.of(instance2)
+                        },
+                    )
+            }
 
         extension.beforeEach(context2)
         assertEquals(getExpectedConnectionHolder(), instance2.connectionHolder)
@@ -249,14 +278,16 @@ class LiquibaseExtensionTest {
     fun `sets connection to auto-commit`() {
         val instance = LiquibaseTestOnClass()
 
-        val context = mockk<ExtensionContext> {
-            every { testClass } returns Optional.of(LiquibaseTestOnClass::class.java)
-            every { testInstances } returns Optional.of(
-                mockk {
-                    every { findInstance(LiquibaseTestOnClass::class.java) } returns Optional.of(instance)
-                }
-            )
-        }
+        val context =
+            mockk<ExtensionContext> {
+                every { testClass } returns Optional.of(LiquibaseTestOnClass::class.java)
+                every { testInstances } returns
+                    Optional.of(
+                        mockk {
+                            every { findInstance(LiquibaseTestOnClass::class.java) } returns Optional.of(instance)
+                        },
+                    )
+            }
 
         extension.beforeEach(context)
         assertTrue(instance.connectionHolder.connection.autoCommit)

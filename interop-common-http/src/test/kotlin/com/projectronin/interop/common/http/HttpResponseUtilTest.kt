@@ -14,9 +14,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class HttpResponseUtilTest {
-    private val response = mockk<HttpResponse> {
-        every { request.url.host } returns "googlay.com"
-    }
+    private val response =
+        mockk<HttpResponse> {
+            every { request.url.host } returns "googlay.com"
+        }
 
     @Test
     fun `unauthorized works`() {

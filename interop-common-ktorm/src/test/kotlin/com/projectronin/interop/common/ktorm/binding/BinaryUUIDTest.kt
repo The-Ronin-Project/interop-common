@@ -16,10 +16,11 @@ import java.util.UUID
 class BinaryUUIDTest {
     @Test
     fun `sqlType supports getting null field`() {
-        val resultSet = mockk<ResultSet> {
-            every { getBytes(1) } returns null
-            every { wasNull() } returns true
-        }
+        val resultSet =
+            mockk<ResultSet> {
+                every { getBytes(1) } returns null
+                every { wasNull() } returns true
+            }
 
         val uuid = BinaryUUIDSqlType.getResult(resultSet, 1)
         assertNull(uuid)
@@ -27,27 +28,29 @@ class BinaryUUIDTest {
 
     @Test
     fun `sqlType supports getting non-null field`() {
-        val resultSet = mockk<ResultSet> {
-            every { getBytes(1) } returns byteArrayOf(
-                18,
-                -90,
-                38,
-                -65,
-                70,
-                -75,
-                76,
-                60,
-                -88,
-                86,
-                25,
-                -105,
-                -42,
-                -6,
-                24,
-                -124
-            )
-            every { wasNull() } returns false
-        }
+        val resultSet =
+            mockk<ResultSet> {
+                every { getBytes(1) } returns
+                    byteArrayOf(
+                        18,
+                        -90,
+                        38,
+                        -65,
+                        70,
+                        -75,
+                        76,
+                        60,
+                        -88,
+                        86,
+                        25,
+                        -105,
+                        -42,
+                        -6,
+                        24,
+                        -124,
+                    )
+                every { wasNull() } returns false
+            }
 
         val uuid = BinaryUUIDSqlType.getResult(resultSet, 1)
         assertEquals(UUID.fromString("12a626bf-46b5-4c3c-a856-1997d6fa1884"), uuid)
@@ -61,18 +64,22 @@ class BinaryUUIDTest {
         verify(exactly = 1) {
             preparedStatement.setObject(
                 1,
-                byteArrayOf(72, 0, -106, -98, -125, 4, 79, -33, -109, 92, 80, -63, -49, 22, -55, 104)
+                byteArrayOf(72, 0, -106, -98, -125, 4, 79, -33, -109, 92, 80, -63, -49, 22, -55, 104),
             )
         }
     }
 
     @Test
     fun `binaryUuid registers column`() {
-        val baseTable = object : BaseTable<Any>("table") {
-            override fun doCreateEntity(row: QueryRowSet, withReferences: Boolean): Any {
-                TODO("Not yet implemented")
+        val baseTable =
+            object : BaseTable<Any>("table") {
+                override fun doCreateEntity(
+                    row: QueryRowSet,
+                    withReferences: Boolean,
+                ): Any {
+                    TODO("Not yet implemented")
+                }
             }
-        }
 
         val spiedBaseTable = spyk(baseTable)
 

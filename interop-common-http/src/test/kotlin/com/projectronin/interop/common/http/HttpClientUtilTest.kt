@@ -38,11 +38,12 @@ class HttpClientUtilTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(HttpStatusCode.OK.value))
         val url = mockWebServer.url("/test").toString()
 
-        val requestResponse = runBlocking {
-            httpClient.request("Test", url) { url ->
-                post(url)
+        val requestResponse =
+            runBlocking {
+                httpClient.request("Test", url) { url ->
+                    post(url)
+                }
             }
-        }
         assertEquals(HttpStatusCode.OK, requestResponse.status)
     }
 
@@ -51,13 +52,14 @@ class HttpClientUtilTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(HttpStatusCode.NotFound.value))
         val url = mockWebServer.url("/test").toString()
 
-        val exception = assertThrows<ClientFailureException> {
-            runBlocking {
-                httpClient.request("Test", url) { url ->
-                    post(url)
+        val exception =
+            assertThrows<ClientFailureException> {
+                runBlocking {
+                    httpClient.request("Test", url) { url ->
+                        post(url)
+                    }
                 }
             }
-        }
         assertEquals("Received 404 Client Error when calling Test [localhost] for $url", exception.message)
     }
 
@@ -66,13 +68,14 @@ class HttpClientUtilTest {
         mockWebServer.enqueue(MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START))
         val url = mockWebServer.url("/test").toString()
 
-        val exception = assertThrows<RequestFailureException> {
-            runBlocking {
-                httpClient.request("Test", url) { url ->
-                    post(url)
+        val exception =
+            assertThrows<RequestFailureException> {
+                runBlocking {
+                    httpClient.request("Test", url) { url ->
+                        post(url)
+                    }
                 }
             }
-        }
         assertTrue(exception.message!!.startsWith("Received exception when calling Test ($url): "))
     }
 }

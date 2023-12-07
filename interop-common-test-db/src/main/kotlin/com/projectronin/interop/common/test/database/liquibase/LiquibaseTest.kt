@@ -23,11 +23,11 @@ import org.junit.jupiter.api.extension.ExtendWith
     dataTypeFactoryClass = MySqlDataTypeFactory::class,
     caseInsensitiveStrategy = Orthography.LOWERCASE,
     caseSensitiveTableNames = false,
-    cacheConnection = false
+    cacheConnection = false,
 )
 annotation class LiquibaseTest(
     val changeLog: String,
-    val dbUrl: String = DEFAULT_DB_URL
+    val dbUrl: String = DEFAULT_DB_URL,
 ) {
     companion object {
         const val DEFAULT_DB_URL = "jdbc:tc:mysql:8.0://localhost:3306/databasename?TC_DAEMON=true"

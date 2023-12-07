@@ -105,9 +105,10 @@ class BrokeredAuthenticatorTest {
 
     @Test
     fun `loads authentication when cached has no expiration`() {
-        val cachedAuthentication = mockk<Authentication> {
-            every { expiresAt } returns null
-        }
+        val cachedAuthentication =
+            mockk<Authentication> {
+                every { expiresAt } returns null
+            }
         setCachedAuthentication(cachedAuthentication)
 
         every { reloadedAuthentication.tokenType } returns "Bearer"
@@ -126,9 +127,10 @@ class BrokeredAuthenticatorTest {
 
     @Test
     fun `loads authentication when cached has expired`() {
-        val cachedAuthentication = mockk<Authentication> {
-            every { expiresAt } returns Instant.now().minusSeconds(600)
-        }
+        val cachedAuthentication =
+            mockk<Authentication> {
+                every { expiresAt } returns Instant.now().minusSeconds(600)
+            }
         setCachedAuthentication(cachedAuthentication)
 
         every { reloadedAuthentication.tokenType } returns "Bearer"
@@ -147,9 +149,10 @@ class BrokeredAuthenticatorTest {
 
     @Test
     fun `loads authentication when cached expires within buffer`() {
-        val cachedAuthentication = mockk<Authentication> {
-            every { expiresAt } returns Instant.now().plusSeconds(25)
-        }
+        val cachedAuthentication =
+            mockk<Authentication> {
+                every { expiresAt } returns Instant.now().plusSeconds(25)
+            }
         setCachedAuthentication(cachedAuthentication)
 
         every { reloadedAuthentication.tokenType } returns "Bearer"
@@ -168,13 +171,14 @@ class BrokeredAuthenticatorTest {
 
     @Test
     fun `returns cached authentication when still valid`() {
-        val cachedAuthentication = mockk<Authentication> {
-            every { expiresAt } returns Instant.now().plusSeconds(600)
-            every { tokenType } returns "Basic"
-            every { accessToken } returns "cached_token"
-            every { scope } returns null
-            every { refreshToken } returns null
-        }
+        val cachedAuthentication =
+            mockk<Authentication> {
+                every { expiresAt } returns Instant.now().plusSeconds(600)
+                every { tokenType } returns "Basic"
+                every { accessToken } returns "cached_token"
+                every { scope } returns null
+                every { refreshToken } returns null
+            }
         setCachedAuthentication(cachedAuthentication)
 
         val authentication = broker.getAuthentication()
@@ -186,8 +190,8 @@ class BrokeredAuthenticatorTest {
     }
 
     private fun getCachedAuthentication() = cachedAuthenticationProperty.getter.call(broker)
-    private fun setCachedAuthentication(authentication: Authentication?) =
-        cachedAuthenticationProperty.setter.call(broker, authentication)
+
+    private fun setCachedAuthentication(authentication: Authentication?) = cachedAuthenticationProperty.setter.call(broker, authentication)
 
     private class BrokeredExample(private val reloadedAuthentication: Authentication) : BrokeredAuthenticator() {
         override fun reloadAuthentication(): Authentication = reloadedAuthentication

@@ -31,15 +31,16 @@ class HttpSpringConfigTest {
 
         val successfulResponse = """{"status":"active"}"""
         mockWebServer.enqueue(
-            MockResponse().setBody(successfulResponse).setHeader("Content-Type", "application/json")
+            MockResponse().setBody(successfulResponse).setHeader("Content-Type", "application/json"),
         )
         mockWebServer.start()
 
-        val response = runBlocking {
-            HttpSpringConfig().getHttpClient().get(mockWebServer.url("/test").toString()) {
-                accept(ContentType.Application.Json)
-            }.bodyAsText()
-        }
+        val response =
+            runBlocking {
+                HttpSpringConfig().getHttpClient().get(mockWebServer.url("/test").toString()) {
+                    accept(ContentType.Application.Json)
+                }.bodyAsText()
+            }
         assertEquals(successfulResponse, response)
 
         assertEquals(2, mockWebServer.requestCount)
@@ -103,14 +104,15 @@ class HttpSpringConfigTest {
 
         mockWebServer.start()
 
-        val response = runBlocking {
-            HttpSpringConfig().getHttpClient().get(mockWebServer.url("/test").toString()) {
-                headers {
-                    append(NO_RETRY_HEADER, "true")
+        val response =
+            runBlocking {
+                HttpSpringConfig().getHttpClient().get(mockWebServer.url("/test").toString()) {
+                    headers {
+                        append(NO_RETRY_HEADER, "true")
+                    }
+                    accept(ContentType.Application.Json)
                 }
-                accept(ContentType.Application.Json)
             }
-        }
         assertEquals(HttpStatusCode.InternalServerError, response.status)
 
         assertEquals(1, mockWebServer.requestCount)

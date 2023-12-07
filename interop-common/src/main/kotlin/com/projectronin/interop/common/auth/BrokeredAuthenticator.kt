@@ -7,7 +7,7 @@ import java.time.Instant
  * Supports authentication workflows that would like to use a brokered cache to prevent repeat Authentication loads.
  */
 abstract class BrokeredAuthenticator(
-    private val expirationBufferInSeconds: Long = 60
+    private val expirationBufferInSeconds: Long = 60,
 ) {
     protected val logger = KotlinLogging.logger(this::class.java.name)
     private var cachedAuthentication: Authentication? = null

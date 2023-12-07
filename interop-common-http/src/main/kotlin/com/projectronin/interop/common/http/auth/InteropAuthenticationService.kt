@@ -23,34 +23,36 @@ import java.time.Instant
  */
 class InteropAuthenticationService(
     private val client: HttpClient,
-    private val authConfig: AuthenticationConfig
+    private val authConfig: AuthenticationConfig,
 ) : BrokeredAuthenticator() {
-
-    override fun reloadAuthentication(): Authentication = if (authConfig.method == AuthMethod.AUTH0) {
-        retrieveAuth0Authentication()
-    } else {
-        retrieveFormBasedAuthentication()
-    }
+    override fun reloadAuthentication(): Authentication =
+        if (authConfig.method == AuthMethod.AUTH0) {
+            retrieveAuth0Authentication()
+        } else {
+            retrieveFormBasedAuthentication()
+        }
 
     /**
      * Uses Auth0 to retrieve authentication.
      */
-    private fun retrieveAuth0Authentication(): Authentication = runBlocking {
-        val payload = Auth0Payload(authConfig.client.id, authConfig.client.secret, authConfig.audience)
-        val httpResponse: HttpResponse = client.post(authConfig.token.url) {
-            contentType(ContentType.Application.Json)
-            setBody(payload)
+    private fun retrieveAuth0Authentication(): Authentication =
+        runBlocking {
+            val payload = Auth0Payload(authConfig.client.id, authConfig.client.secret, authConfig.audience)
+            val httpResponse: HttpResponse =
+                client.post(authConfig.token.url) {
+                    contentType(ContentType.Application.Json)
+                    setBody(payload)
+                }
+            httpResponse.throwExceptionFromHttpStatus("Auth0", "POST ${authConfig.token.url}")
+            httpResponse.body<Auth0Authentication>()
         }
-        httpResponse.throwExceptionFromHttpStatus("Auth0", "POST ${authConfig.token.url}")
-        httpResponse.body<Auth0Authentication>()
-    }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
     private data class Auth0Payload(
         val clientId: String,
         val clientSecret: String,
         val audience: String,
-        val grantType: String = "client_credentials"
+        val grantType: String = "client_credentials",
     )
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
@@ -59,7 +61,7 @@ class InteropAuthenticationService(
         override val tokenType: String,
         override val scope: String? = null,
         private val expiresIn: Long? = null,
-        override val refreshToken: String? = null
+        override val refreshToken: String? = null,
     ) : Authentication {
         override val expiresAt: Instant? = expiresIn?.let { Instant.now().plusSeconds(expiresIn) }
 
@@ -70,18 +72,21 @@ class InteropAuthenticationService(
     /**
      * Uses a more traditional form-based authentication.
      */
-    private fun retrieveFormBasedAuthentication(): Authentication = runBlocking {
-        val json: JsonNode = client.submitForm(
-            url = authConfig.token.url,
-            formParameters = Parameters.build {
-                append("grant_type", "client_credentials")
-                append("client_id", authConfig.client.id)
-                append("client_secret", authConfig.client.secret)
-            }
-        ).body()
-        val accessToken = json.get("access_token").asText()
-        FormBasedAuthentication(accessToken)
-    }
+    private fun retrieveFormBasedAuthentication(): Authentication =
+        runBlocking {
+            val json: JsonNode =
+                client.submitForm(
+                    url = authConfig.token.url,
+                    formParameters =
+                        Parameters.build {
+                            append("grant_type", "client_credentials")
+                            append("client_id", authConfig.client.id)
+                            append("client_secret", authConfig.client.secret)
+                        },
+                ).body()
+            val accessToken = json.get("access_token").asText()
+            FormBasedAuthentication(accessToken)
+        }
 
     data class FormBasedAuthentication(override val accessToken: String) : Authentication {
         override val tokenType: String = "Bearer"

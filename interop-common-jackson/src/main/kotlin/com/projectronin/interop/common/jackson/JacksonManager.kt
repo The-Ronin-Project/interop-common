@@ -29,7 +29,7 @@ class JacksonManager {
          */
         fun <T : ObjectMapper> setUpMapper(
             objectMapper: T,
-            jsonInclude: JsonInclude.Include = JsonInclude.Include.NON_EMPTY
+            jsonInclude: JsonInclude.Include = JsonInclude.Include.NON_EMPTY,
         ): T {
             with(objectMapper) {
                 registerKotlinModule()

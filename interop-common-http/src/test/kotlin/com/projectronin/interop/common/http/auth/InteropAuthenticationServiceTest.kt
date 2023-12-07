@@ -20,12 +20,13 @@ class InteropAuthenticationServiceTest {
     private val audience = "audience"
     private val clientId = "MyTestClientId"
     private val clientSecret = "SuperSecretAndSafe"
-    private val authenticationSpringConfig = AuthenticationConfig(
-        token = Token(authUrl),
-        audience = audience,
-        client = Client(id = clientId, secret = clientSecret),
-        method = AuthMethod.AUTH0
-    )
+    private val authenticationSpringConfig =
+        AuthenticationConfig(
+            token = Token(authUrl),
+            audience = audience,
+            client = Client(id = clientId, secret = clientSecret),
+            method = AuthMethod.AUTH0,
+        )
     private val service = InteropAuthenticationService(httpClient, authenticationSpringConfig)
 
     private val expectedPayload =
@@ -37,12 +38,13 @@ class InteropAuthenticationServiceTest {
             MockResponse()
                 .setResponseCode(HttpStatusCode.Forbidden.value)
                 .setBody("")
-                .setHeader("Content-Type", "application/json")
+                .setHeader("Content-Type", "application/json"),
         )
 
-        val exception = assertThrows<ClientAuthenticationException> {
-            service.getAuthentication()
-        }
+        val exception =
+            assertThrows<ClientAuthenticationException> {
+                service.getAuthentication()
+            }
         val message = exception.message!!
         assertTrue(message.contains("Received 403 Client Error when calling Auth0"))
         assertTrue(message.contains("for POST"))
@@ -59,7 +61,7 @@ class InteropAuthenticationServiceTest {
             MockResponse()
                 .setResponseCode(HttpStatusCode.OK.value)
                 .setBody("""{"access_token":"YouShallPass","token_type":"Bearer","expires_in":180}""")
-                .setHeader("Content-Type", "application/json")
+                .setHeader("Content-Type", "application/json"),
         )
 
         val authentication = service.getAuthentication()
@@ -77,18 +79,19 @@ class InteropAuthenticationServiceTest {
 
     @Test
     fun `retrieves form-based authentication`() {
-        val authenticationSpringConfig = AuthenticationConfig(
-            token = Token(authUrl),
-            audience = audience,
-            client = Client(id = clientId, secret = clientSecret),
-            method = AuthMethod.STANDARD
-        )
+        val authenticationSpringConfig =
+            AuthenticationConfig(
+                token = Token(authUrl),
+                audience = audience,
+                client = Client(id = clientId, secret = clientSecret),
+                method = AuthMethod.STANDARD,
+            )
         val service = InteropAuthenticationService(httpClient, authenticationSpringConfig)
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(HttpStatusCode.OK.value)
                 .setBody("""{"access_token":"YouShallPass","token_type":"Bearer"}""")
-                .setHeader("Content-Type", "application/json")
+                .setHeader("Content-Type", "application/json"),
         )
 
         val authentication = service.getAuthentication()
@@ -103,7 +106,7 @@ class InteropAuthenticationServiceTest {
         assertEquals("application/x-www-form-urlencoded; charset=UTF-8", request.getHeader("Content-Type"))
         assertEquals(
             "grant_type=client_credentials&client_id=$clientId&client_secret=$clientSecret",
-            request.body.readUtf8()
+            request.body.readUtf8(),
         )
     }
 }

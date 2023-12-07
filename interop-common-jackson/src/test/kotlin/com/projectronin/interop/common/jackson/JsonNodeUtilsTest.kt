@@ -48,7 +48,7 @@ class JsonNodeUtilsTest {
     fun `getAs throws exception for unknown field`() {
         data class CustomType(
             val id: Int,
-            val name: String
+            val name: String,
         )
 
         val parser = jsonParser("""{"field":{"id":1,"name":"custom"}}""")
@@ -60,7 +60,7 @@ class JsonNodeUtilsTest {
     fun `getAs returns requested type for field`() {
         data class CustomType(
             val id: Int,
-            val name: String
+            val name: String,
         )
 
         val parser = jsonParser("""{"field":{"id":1,"name":"custom"}}""")
@@ -72,7 +72,7 @@ class JsonNodeUtilsTest {
     fun `getAsOrNull returns null for unknown field`() {
         data class CustomType(
             val id: Int,
-            val name: String
+            val name: String,
         )
 
         val parser = jsonParser("""{"field":{"id":1,"name":"custom"}}""")
@@ -84,7 +84,7 @@ class JsonNodeUtilsTest {
     fun `getAsOrNull returns requested type for field`() {
         data class CustomType(
             val id: Int,
-            val name: String
+            val name: String,
         )
 
         val parser = jsonParser("""{"field":{"id":1,"name":"custom"}}""")
@@ -110,7 +110,7 @@ class JsonNodeUtilsTest {
     fun `readValueAs reads the current parser as the requested type`() {
         data class CustomType(
             val id: Int,
-            val name: String
+            val name: String,
         )
 
         val parser = jsonParser("""{"id":1,"name":"custom"}""")

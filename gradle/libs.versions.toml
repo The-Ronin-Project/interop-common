@@ -1,6 +1,6 @@
 [versions]
 dbrider = "1.41.0"
-interop-gradle = "3.3.0"
+interop-gradle = "3.4.0"
 jackson = "2.16.0"
 # @pin INT-2283
 ktor = "2.3.4"

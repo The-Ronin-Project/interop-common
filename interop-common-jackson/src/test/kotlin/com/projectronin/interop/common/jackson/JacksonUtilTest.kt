@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class JacksonUtilTest {
-
     @Test
     fun `multiple types work`() {
         val example = ExampleObject("first")
@@ -31,9 +30,9 @@ internal class JacksonUtilTest {
 }
 
 private data class ExampleObject(
-    val first: String
+    val first: String,
 )
 
 private data class ExampleSecondObject(
-    val second: String
+    val second: String,
 )

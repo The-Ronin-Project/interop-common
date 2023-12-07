@@ -18,12 +18,19 @@ fun BaseTable<*>.binaryUuid(name: String): Column<UUID> = registerColumn(name, B
  * SqlType supporting storing a UUID as a BINARY datatype.
  */
 object BinaryUUIDSqlType : SqlType<UUID>(Types.BINARY, typeName = "binary") {
-    override fun doGetResult(rs: ResultSet, index: Int): UUID? {
+    override fun doGetResult(
+        rs: ResultSet,
+        index: Int,
+    ): UUID? {
         val byteArray = rs.getBytes(index)
         return byteArray?.let { UuidCreator.fromBytes(byteArray) }
     }
 
-    override fun doSetParameter(ps: PreparedStatement, index: Int, parameter: UUID) {
+    override fun doSetParameter(
+        ps: PreparedStatement,
+        index: Int,
+        parameter: UUID,
+    ) {
         ps.setObject(index, UuidCreator.toBytes(parameter))
     }
 }

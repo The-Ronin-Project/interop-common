@@ -18,13 +18,15 @@ import org.ktorm.schema.varchar
 class DatabaseUtilsTest {
     @DBRiderConnection
     lateinit var connectionHolder: ConnectionHolder
-    interface aDO : Entity<aDO> {
-        companion object : Entity.Factory<aDO>()
+
+    interface ADataObject : Entity<ADataObject> {
+        companion object : Entity.Factory<ADataObject>()
+
         var id: Int
         var whatDoesSheDo: String
     }
 
-    object table : Table<aDO>("tables") {
+    object ATable : Table<ADataObject>("tables") {
         var id = int("tables_id").bindTo { it.id }.primaryKey()
         var whatDoesSheDo = varchar("her_job").bindTo { it.whatDoesSheDo }
     }
@@ -32,7 +34,7 @@ class DatabaseUtilsTest {
     @Test
     @DataSet(value = ["/dbunit/Tables.yaml"])
     fun `singleValueLookup works`() {
-        val result = KtormHelper.database().singleValueLookup<String, aDO>("tables!!!!", table.whatDoesSheDo)
+        val result = KtormHelper.database().singleValueLookup<String, ADataObject>("tables!!!!", ATable.whatDoesSheDo)
         assertEquals(2, result?.id)
         assertEquals("tables!!!!", result?.whatDoesSheDo)
     }
@@ -40,13 +42,13 @@ class DatabaseUtilsTest {
     @Test
     @DataSet(value = ["/dbunit/Tables.yaml"])
     fun `singleValueLookup works for null`() {
-        assertNull(KtormHelper.database().singleValueLookup<String, aDO>("3", table.whatDoesSheDo))
+        assertNull(KtormHelper.database().singleValueLookup<String, ADataObject>("3", ATable.whatDoesSheDo))
     }
 
     @Test
     @DataSet(value = ["/dbunit/Tables.yaml"])
     fun `valueLookup works`() {
-        val result = KtormHelper.database().valueLookup<String, aDO>("tables!!!!", table.whatDoesSheDo)
+        val result = KtormHelper.database().valueLookup<String, ADataObject>("tables!!!!", ATable.whatDoesSheDo)
         assertNotNull(result)
         assertEquals(1, result.size)
         assertEquals(2, result.first().id)
@@ -56,7 +58,7 @@ class DatabaseUtilsTest {
     @Test
     @DataSet(value = ["/dbunit/Tables.yaml"])
     fun `valueLookup works nothing`() {
-        val result = KtormHelper.database().valueLookup<String, aDO>("3", table.whatDoesSheDo)
+        val result = KtormHelper.database().valueLookup<String, ADataObject>("3", ATable.whatDoesSheDo)
         assertNotNull(result)
         assertEquals(0, result.size)
     }

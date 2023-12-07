@@ -7,7 +7,10 @@ import com.projectronin.interop.common.http.exceptions.ServiceUnavailableExcepti
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
 
-fun HttpResponse.throwExceptionFromHttpStatus(serverName: String, serviceName: String? = null) {
+fun HttpResponse.throwExceptionFromHttpStatus(
+    serverName: String,
+    serviceName: String? = null,
+) {
     val host = this.request.url.host
     val fullServerName = "$serverName [$host]"
     val status = this.status

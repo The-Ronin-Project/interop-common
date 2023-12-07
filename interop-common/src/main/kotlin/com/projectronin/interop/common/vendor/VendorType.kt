@@ -5,5 +5,5 @@ package com.projectronin.interop.common.vendor
  */
 enum class VendorType {
     EPIC,
-    CERNER
+    CERNER,
 }

@@ -21,22 +21,24 @@ import java.util.concurrent.TimeUnit
 class ContentLengthSupplierTest {
     private val testOutputPhase = PipelinePhase("TestOutput")
 
-    private val mockEngine = MockEngine {
-        respond(
-            content = "OK",
-            status = HttpStatusCode.OK
-        )
-    }
+    private val mockEngine =
+        MockEngine {
+            respond(
+                content = "OK",
+                status = HttpStatusCode.OK,
+            )
+        }
 
-    private val httpClient = HttpClient(mockEngine) {
-        install(ContentLengthSupplier)
-    }
+    private val httpClient =
+        HttpClient(mockEngine) {
+            install(ContentLengthSupplier)
+        }
 
     @Test
     fun `key is set appropriately`() {
         assertEquals(
             AttributeKey<ContentLengthSupplier>("ContentLengthSupplier"),
-            ContentLengthSupplier.key
+            ContentLengthSupplier.key,
         )
     }
 
@@ -92,7 +94,10 @@ class ContentLengthSupplierTest {
         }
     }
 
-    private fun runPipelineAndAssertOutput(input: Any, assert: (Any) -> Unit) {
+    private fun runPipelineAndAssertOutput(
+        input: Any,
+        assert: (Any) -> Unit,
+    ) {
         httpClient.requestPipeline.insertPhaseAfter(ContentLengthSupplier.contentLengthPhase, testOutputPhase)
         httpClient.requestPipeline.intercept(testOutputPhase) { content ->
             assert(content)

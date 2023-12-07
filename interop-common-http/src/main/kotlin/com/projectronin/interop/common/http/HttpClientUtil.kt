@@ -11,7 +11,7 @@ import io.ktor.client.statement.HttpResponse
 inline fun HttpClient.request(
     serverName: String,
     url: String,
-    block: HttpClient.(url: String) -> HttpResponse
+    block: HttpClient.(url: String) -> HttpResponse,
 ): HttpResponse =
     runCatching { block.invoke(this, url) }.fold(
         onSuccess = {
@@ -20,5 +20,5 @@ inline fun HttpClient.request(
         },
         onFailure = {
             throw RequestFailureException(it, serverName, url)
-        }
+        },
     )

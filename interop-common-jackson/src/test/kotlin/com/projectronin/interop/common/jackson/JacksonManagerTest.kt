@@ -84,7 +84,7 @@ class JacksonManagerTest {
         val objectMapper = JacksonManager.objectMapper
         assertEquals(
             JsonInclude.Include.NON_EMPTY,
-            objectMapper.serializationConfig.defaultPropertyInclusion.valueInclusion
+            objectMapper.serializationConfig.defaultPropertyInclusion.valueInclusion,
         )
     }
 
@@ -93,7 +93,7 @@ class JacksonManagerTest {
         val objectMapper = JacksonManager.nonAbsentObjectMapper
         assertEquals(
             JsonInclude.Include.NON_ABSENT,
-            objectMapper.serializationConfig.defaultPropertyInclusion.valueInclusion
+            objectMapper.serializationConfig.defaultPropertyInclusion.valueInclusion,
         )
     }
 }

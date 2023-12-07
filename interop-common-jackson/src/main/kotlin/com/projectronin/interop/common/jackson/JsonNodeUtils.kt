@@ -22,19 +22,26 @@ fun JsonNode.getAsDoubleOrNull(fieldName: String): Double? = this.get(fieldName)
 /**
  * Reads the supplied [fieldName] from the node and returns the data as the requested type [T] using the [currentParser].
  */
-inline fun <reified T> JsonNode.getAs(fieldName: String, currentParser: JsonParser): T =
-    this.getAsOrNull(fieldName, currentParser)!!
+inline fun <reified T> JsonNode.getAs(
+    fieldName: String,
+    currentParser: JsonParser,
+): T = this.getAsOrNull(fieldName, currentParser)!!
 
 /**
  * Reads the supplied [fieldName] from the node and returns the data as the requested type [T] using the [currentParser] if present, or null.
  */
-inline fun <reified T> JsonNode.getAsOrNull(fieldName: String, currentParser: JsonParser): T? =
-    this.get(fieldName)?.readValueAs(currentParser, T::class.java)
+inline fun <reified T> JsonNode.getAsOrNull(
+    fieldName: String,
+    currentParser: JsonParser,
+): T? = this.get(fieldName)?.readValueAs(currentParser, T::class.java)
 
 /**
  * Reads the supplied [fieldName] from the node and returns the data as a List of the requested type [T] using the [currentParser] if present, or an empty List.
  */
-inline fun <reified T> JsonNode.getAsList(fieldName: String, currentParser: JsonParser): List<T> {
+inline fun <reified T> JsonNode.getAsList(
+    fieldName: String,
+    currentParser: JsonParser,
+): List<T> {
     val parser = this.get(fieldName)?.traverse() ?: return listOf()
     parser.codec = currentParser.codec
     return parser.readValueAs(object : TypeReference<List<T>>() {})
@@ -43,7 +50,10 @@ inline fun <reified T> JsonNode.getAsList(fieldName: String, currentParser: Json
 /**
  * Reads the current value as type [T] using the [currentParser].
  */
-fun <T> JsonNode.readValueAs(currentParser: JsonParser, clazz: Class<T>): T {
+fun <T> JsonNode.readValueAs(
+    currentParser: JsonParser,
+    clazz: Class<T>,
+): T {
     val parser = this.traverse()
     parser.codec = currentParser.codec
     return parser.readValueAs(clazz)
@@ -52,5 +62,4 @@ fun <T> JsonNode.readValueAs(currentParser: JsonParser, clazz: Class<T>): T {
 /**
  * Returns the name of all fields on the node starting with the [prefix].
  */
-fun JsonNode.fieldsStartingWith(prefix: String): List<String> =
-    this.fieldNames().asSequence().filter { it.startsWith(prefix) }.toList()
+fun JsonNode.fieldsStartingWith(prefix: String): List<String> = this.fieldNames().asSequence().filter { it.startsWith(prefix) }.toList()

@@ -88,7 +88,10 @@ class LiquibaseExtension : BeforeEachCallback, AfterAllCallback {
             .find { it.findAnnotation<DBRiderConnection>() != null }
     }
 
-    private fun setDBRiderConnection(connectionProperty: KMutableProperty<*>, testInstance: Any) {
+    private fun setDBRiderConnection(
+        connectionProperty: KMutableProperty<*>,
+        testInstance: Any,
+    ) {
         logger.info { "Wiring connection to ${connectionProperty.name} on $testInstance" }
         connectionProperty.setter.call(testInstance, connectionHolder)
     }

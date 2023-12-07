@@ -52,7 +52,8 @@ class HttpSpringConfig {
                             // If the underlying exception is a timeout, then retry
                             is HttpRequestTimeoutException,
                             is ConnectTimeoutException,
-                            is SocketTimeoutException -> true
+                            is SocketTimeoutException,
+                            -> true
 
                             // Else, retry if the cause was not a cancellation.
                             else -> cause !is CancellationException
