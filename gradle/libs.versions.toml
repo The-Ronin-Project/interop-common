@@ -1,16 +1,14 @@
 [versions]
 dbrider = "1.41.0"
-interop-gradle = "3.4.0"
+interop-gradle = "4.0.0"
 jackson = "2.16.0"
-# @pin INT-2283
-ktor = "2.3.4"
+ktor = "2.3.7"
 ktorm = "3.6.0"
 liquibase = "4.25.0"
 mockk = "1.13.8"
 mockwebserver = "4.12.0"
 mysql = "8.2.0"
-# @pin until can move to JDK 17
-spring-boot = "2.7.13"
+spring-boot = "3.2.0"
 testcontainers = "1.19.3"
 uuid-creator = "5.3.5"
 

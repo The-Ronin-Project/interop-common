@@ -1,7 +1,7 @@
 package com.projectronin.interop.common.http.auth
 
-import javax.validation.Valid
-import javax.validation.constraints.NotEmpty
+import jakarta.validation.Valid
+import jakarta.validation.constraints.NotEmpty
 
 // These need to be vars because we want projects to be able to define the prefix, but we can't
 data class AuthenticationConfig(
