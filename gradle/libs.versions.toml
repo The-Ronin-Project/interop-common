@@ -1,16 +1,16 @@
 [versions]
 dbrider = "1.41.0"
-interop-gradle = "4.0.0"
-jackson = "2.16.0"
+interop-gradle = "4.0.2"
+jackson = "2.16.1"
 ktor = "2.3.7"
 ktorm = "3.6.0"
-liquibase = "4.25.0"
+liquibase = "4.25.1"
 mockk = "1.13.8"
 mockwebserver = "4.12.0"
 mysql = "8.2.0"
-spring-boot = "3.2.0"
+spring-boot = "3.2.1"
 testcontainers = "1.19.3"
-uuid-creator = "5.3.5"
+uuid-creator = "5.3.7"
 
 [libraries]
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
