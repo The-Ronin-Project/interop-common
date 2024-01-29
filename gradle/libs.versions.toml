@@ -1,6 +1,6 @@
 [versions]
 dbrider = "1.41.0"
-interop-gradle = "4.0.2"
+interop-gradle = "4.0.3"
 jackson = "2.16.1"
 ktor = "2.3.7"
 ktorm = "3.6.0"
@@ -9,7 +9,7 @@ mockk = "1.13.9"
 mockwebserver = "4.12.0"
 mysql = "8.3.0"
 spring-boot = "3.2.2"
-testcontainers = "1.19.3"
+testcontainers = "1.19.4"
 uuid-creator = "5.3.7"
 
 [libraries]
