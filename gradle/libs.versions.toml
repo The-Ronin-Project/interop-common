@@ -2,7 +2,7 @@
 dbrider = "1.41.0"
 interop-gradle = "4.0.3"
 jackson = "2.16.1"
-ktor = "2.3.7"
+ktor = "2.3.8"
 ktorm = "3.6.0"
 liquibase = "4.25.1"
 mockk = "1.13.9"
