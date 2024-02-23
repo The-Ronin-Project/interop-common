@@ -14,6 +14,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.utils.unwrapCancellationException
+import io.ktor.http.HttpHeaders
 import io.ktor.serialization.jackson.jackson
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -37,6 +38,7 @@ class HttpSpringConfig {
             install(ContentLengthSupplier)
             install(Logging) {
                 level = LogLevel.ALL
+                sanitizeHeader { header -> header == HttpHeaders.Authorization }
             }
             install(HttpTimeout) {
                 requestTimeoutMillis = 15000 // this is ktor's default
