@@ -2,14 +2,14 @@
 dbrider = "1.41.1"
 interop-gradle = "4.2.1"
 jackson = "2.16.1"
-ktor = "2.3.8"
+ktor = "2.3.9"
 ktorm = "3.6.0"
 liquibase = "4.26.0"
 mockk = "1.13.10"
 mockwebserver = "4.12.0"
 mysql = "8.3.0"
 spring-boot = "3.2.3"
-testcontainers = "1.19.6"
+testcontainers = "1.19.7"
 uuid-creator = "5.3.7"
 
 [libraries]
